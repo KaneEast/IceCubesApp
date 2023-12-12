@@ -65,8 +65,6 @@ struct AboutView: View {
 
         • [Bodega](https://github.com/mergesort/Bodega)
 
-        • [Nuke](https://github.com/kean/Nuke)
-
         • [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)
 
         • [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)

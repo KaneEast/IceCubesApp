@@ -5,7 +5,6 @@ import Env
 import Foundation
 import Models
 import Network
-import Nuke
 import SwiftData
 import SwiftUI
 import Timeline
@@ -38,7 +37,6 @@ struct SettingsTabs: View {
         accountsSection
         generalSection
         otherSections
-        cacheSection
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
@@ -313,22 +311,5 @@ struct SettingsTabs: View {
     .toolbar {
       EditButton()
     }
-  }
-
-  private var cacheSection: some View {
-    Section("settings.section.cache") {
-      if cachedRemoved {
-        Text("action.done")
-          .transition(.move(edge: .leading))
-      } else {
-        Button("settings.cache-media.clear", role: .destructive) {
-          ImagePipeline.shared.cache.removeAll()
-          withAnimation {
-            cachedRemoved = true
-          }
-        }
-      }
-    }
-    .listRowBackground(theme.primaryBackgroundColor)
   }
 }

@@ -1,6 +1,5 @@
 import DesignSystem
 import Models
-import NukeUI
 import SwiftUI
 
 struct InstanceInfoView: View {

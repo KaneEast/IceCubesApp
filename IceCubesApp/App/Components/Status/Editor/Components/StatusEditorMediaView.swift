@@ -153,8 +153,7 @@ struct StatusEditorMediaView: View {
 
   private var placeholderView: some View {
     Rectangle()
-      .foregroundColor(theme.secondaryBackgroundColor)
+      .foregroundColor(.gray)
       .frame(width: 150, height: 150)
-      .accessibilityHidden(true)
   }
 }

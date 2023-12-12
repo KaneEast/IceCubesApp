@@ -29,14 +29,13 @@ public struct StatusEmbeddedView: View {
       Spacer()
     }
     .padding(8)
-    .background(theme.secondaryBackgroundColor)
+    .background(.gray)
     .cornerRadius(4)
     .overlay(
       RoundedRectangle(cornerRadius: 4)
         .stroke(.gray.opacity(0.35), lineWidth: 1)
     )
     .padding(.top, 8)
-    .accessibilityElement(children: .combine)
   }
 
   private func makeAccountView(account: Account) -> some View {

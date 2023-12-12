@@ -42,7 +42,6 @@ public struct TextView: View {
       minHeight: calculatedHeight,
       maxHeight: calculatedHeight
     )
-    .accessibilityValue($text.wrappedValue.string.isEmpty ? (placeholderText ?? "") : $text.wrappedValue.string)
     .background(
       placeholderView?
         .foregroundColor(Color(.placeholderText))
@@ -50,8 +49,7 @@ public struct TextView: View {
         .font(.scaledBody)
         .padding(.horizontal, 0)
         .padding(.vertical, 0)
-        .opacity(isEmpty ? 1 : 0)
-        .accessibilityHidden(true),
+        .opacity(isEmpty ? 1 : 0),
       alignment: .topLeading
     )
   }

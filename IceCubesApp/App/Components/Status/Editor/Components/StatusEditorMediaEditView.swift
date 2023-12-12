@@ -27,7 +27,7 @@ struct StatusEditorMediaEditView: View {
                     axis: .vertical)
             .focused($isFieldFocused)
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(Color.white)
         Section {
           if let url = container.mediaAttachment?.url {
             AsyncImage(
@@ -48,10 +48,10 @@ struct StatusEditorMediaEditView: View {
             )
           }
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(Color.white)
       }
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      .background(.gray)
       .onAppear {
         if !didAppear {
           imageDescription = container.mediaAttachment?.description ?? ""

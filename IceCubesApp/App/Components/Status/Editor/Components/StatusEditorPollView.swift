@@ -84,8 +84,8 @@ struct StatusEditorPollView: View {
     }
     .background(
       RoundedRectangle(cornerRadius: 6.0)
-        .stroke(theme.secondaryBackgroundColor.opacity(0.6), lineWidth: 1)
-        .background(theme.primaryBackgroundColor.opacity(0.3))
+        .stroke(.gray.opacity(0.6), lineWidth: 1)
+        .background(Color.white.opacity(0.3))
     )
   }
 

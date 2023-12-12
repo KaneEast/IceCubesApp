@@ -30,7 +30,7 @@ struct DraftsListView: View {
                 .font(.footnote)
                 .foregroundStyle(.gray)
             }
-          }.listRowBackground(theme.primaryBackgroundColor)
+          }.listRowBackground(Color.white)
         }
         .onDelete { indexes in
           if let index = indexes.first {
@@ -44,7 +44,7 @@ struct DraftsListView: View {
         }
       }
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      .background(.gray)
       .navigationTitle("status.editor.drafts.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
     }

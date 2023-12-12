@@ -26,7 +26,7 @@ struct StatusRowContentView: View {
       }
 
       if !reasons.contains(.placeholder),
-         !isCompact,
+      !isCompact,
          viewModel.isEmbedLoading || viewModel.embeddedStatus != nil
       {
         StatusEmbeddedView(status: viewModel.embeddedStatus ?? ModelsStatus.placeholder(),
@@ -46,7 +46,6 @@ struct StatusRowContentView: View {
             Spacer()
           }
         }
-        .accessibilityHidden(isFocused == false)
         .padding(.vertical, 4)
       }
 

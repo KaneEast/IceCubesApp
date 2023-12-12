@@ -1,10 +1,4 @@
-
-
-
 import Foundation
-
-
-
 import SwiftUI
 
 @MainActor
@@ -15,20 +9,20 @@ public struct StatusRowView: View {
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.isStatusReplyToPrevious) private var isStatusReplyToPrevious
-
+  
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
-
+  
   @State private var viewModel: StatusRowViewModel
-
+  
   public init(viewModel: StatusRowViewModel) {
     _viewModel = .init(initialValue: viewModel)
   }
-
+  
   var contextMenu: some View {
     StatusRowContextMenu(viewModel: viewModel)
   }
-
+  
   public var body: some View {
     HStack(spacing: 0) {
       if isStatusReplyToPrevious {
@@ -47,25 +41,27 @@ public struct StatusRowView: View {
             EmptyView()
           }
         } else {
-          if !isCompact, theme.avatarPosition == .leading {
-            Group {
-              StatusRowReblogView(viewModel: viewModel)
-              StatusRowReplyView(viewModel: viewModel)
-            }
-            .padding(.leading, AvatarView.Size.status.size.width + .statusColumnsSpacing)
-          }
+          
+//          if !isCompact, theme.avatarPosition == .leading {
+//            Group {
+//              StatusRowReblogView(viewModel: viewModel)
+//              StatusRowReplyView(viewModel: viewModel)
+//            }
+//            .padding(.leading, AvatarView.Size.status.size.width + .statusColumnsSpacing)
+//          }
           HStack(alignment: .top, spacing: .statusColumnsSpacing) {
-            if !isCompact,
-               theme.avatarPosition == .leading
-            {
-              Button {
-                viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-              } label: {
-                AvatarView(url: viewModel.finalStatus.account.avatar, size: .status)
-              }
-            }
+//            if !isCompact,
+//               theme.avatarPosition == .leading
+//            {
+//              Button {
+//                viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+//              } label: {
+//                AvatarView(url: viewModel.finalStatus.account.avatar, size: .status)
+//              }
+//            }
             VStack(alignment: .leading) {
-              if !isCompact, theme.avatarPosition == .top {
+//              if !isCompact, theme.avatarPosition == .top {
+              if !isCompact {
                 StatusRowReblogView(viewModel: viewModel)
                 StatusRowReplyView(viewModel: viewModel)
               }
@@ -86,7 +82,7 @@ public struct StatusRowView: View {
                   }
               }
               VStack(alignment: .leading, spacing: 12) {
-                if viewModel.showActions, isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
+                if viewModel.showActions, !isInCaptureMode {
                   StatusRowActionsView(viewModel: viewModel)
                     .padding(.top, 8)
                     .tint(isFocused ? theme.tintColor : .gray)
@@ -96,13 +92,15 @@ public struct StatusRowView: View {
                       viewModel.navigateToDetail()
                     }
                 }
-
+                
                 if isFocused, !isCompact {
                   StatusRowDetailView(viewModel: viewModel)
                 }
               }
             }
           }
+          
+          
         }
       }
     }
@@ -143,7 +141,7 @@ public struct StatusRowView: View {
                          trailing: .layoutPadding))
     .accessibilityElement(children: isFocused ? .contain : .combine)
     .accessibilityLabel(isFocused == false && accessibilityVoiceOverEnabled
-      ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
+                        ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
     .accessibilityHidden(viewModel.filter?.filter.filterAction == .hide)
     .accessibilityAction {
       guard !isFocused else { return }
@@ -189,7 +187,7 @@ public struct StatusRowView: View {
                                                          client: viewModel.client)
     )
   }
-
+  
   @ViewBuilder
   private var accessibilityActions: some View {
     // Add reply and quote, which are lost when the swipe actions are removed
@@ -197,13 +195,13 @@ public struct StatusRowView: View {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
     }
-
+    
     Button("settings.swipeactions.status.action.quote") {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
     }
     .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv)
-
+    
     if viewModel.finalStatus.mediaAttachments.isEmpty == false {
       Button("accessibility.status.media-viewer-action.label") {
         HapticManager.shared.fireHaptic(of: .notification(.success))
@@ -211,18 +209,18 @@ public struct StatusRowView: View {
         quickLook.prepareFor(selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
       }
     }
-
+    
     Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
       withAnimation {
         viewModel.displaySpoiler.toggle()
       }
     }
-
+    
     Button("@\(viewModel.status.account.username)") {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
     }
-
+    
     // Add a reference to the post creator
     if viewModel.status.account != viewModel.finalStatus.account {
       Button("@\(viewModel.finalStatus.account.username)") {
@@ -230,7 +228,7 @@ public struct StatusRowView: View {
         viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.finalStatus.account.id))
       }
     }
-
+    
     // Add in each detected link in the content
     ForEach(viewModel.finalStatus.content.links) { link in
       switch link.type {
@@ -254,7 +252,7 @@ public struct StatusRowView: View {
       }
     }
   }
-
+  
   private func makeFilterView(filter: Filter) -> some View {
     HStack {
       Text("status.filter.filtered-by-\(filter.title)")
@@ -270,7 +268,7 @@ public struct StatusRowView: View {
       viewModel.isFiltered = false
     }
   }
-
+  
   private var remoteContentLoadingView: some View {
     ZStack(alignment: .center) {
       VStack {
@@ -292,29 +290,29 @@ public struct StatusRowView: View {
 @MainActor
 private struct CombinedAccessibilityLabel {
   let viewModel: StatusRowViewModel
-
+  
   var hasSpoiler: Bool {
     viewModel.displaySpoiler && viewModel.finalStatus.spoilerText.asRawText.isEmpty == false
   }
-
+  
   var isReply: Bool {
     if let accountId = viewModel.status.inReplyToAccountId, viewModel.status.mentions.contains(where: { $0.id == accountId }) {
       return true
     }
     return false
   }
-
+  
   var isBoost: Bool {
     viewModel.status.reblog != nil
   }
-
+  
   var filter: Filter? {
     guard viewModel.isFiltered else {
       return nil
     }
     return viewModel.filter?.filter
   }
-
+  
   func finalLabel() -> Text {
     if let filter {
       switch filter.filterAction {
@@ -325,23 +323,23 @@ private struct CombinedAccessibilityLabel {
       }
     } else {
       userNamePreamble() +
-        Text(hasSpoiler
-          ? viewModel.finalStatus.spoilerText.asRawText
-          : viewModel.finalStatus.content.asRawText
-        ) +
-        Text(hasSpoiler
-          ? "status.editor.spoiler"
-          : ""
-        ) + Text(", ") +
-        pollText() +
-        imageAltText() +
-        Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
-        Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
-        Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
-        Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
+      Text(hasSpoiler
+           ? viewModel.finalStatus.spoilerText.asRawText
+           : viewModel.finalStatus.content.asRawText
+      ) +
+      Text(hasSpoiler
+           ? "status.editor.spoiler"
+           : ""
+      ) + Text(", ") +
+      pollText() +
+      imageAltText() +
+      Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
+      Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
+      Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
+      Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
     }
   }
-
+  
   func userNamePreamble() -> Text {
     switch (isReply, isBoost) {
     case (true, false):
@@ -352,23 +350,23 @@ private struct CombinedAccessibilityLabel {
       Text(userDisplayName()) + Text(", ")
     }
   }
-
+  
   func userDisplayName() -> String {
     viewModel.status.account.displayNameWithoutEmojis.count < 4
-      ? viewModel.status.account.safeDisplayName
-      : viewModel.status.account.displayNameWithoutEmojis
+    ? viewModel.status.account.safeDisplayName
+    : viewModel.status.account.displayNameWithoutEmojis
   }
-
+  
   func finalUserDisplayName() -> String {
     viewModel.finalStatus.account.displayNameWithoutEmojis.count < 4
-      ? viewModel.finalStatus.account.safeDisplayName
-      : viewModel.finalStatus.account.displayNameWithoutEmojis
+    ? viewModel.finalStatus.account.safeDisplayName
+    : viewModel.finalStatus.account.displayNameWithoutEmojis
   }
-
+  
   func imageAltText() -> Text {
     let descriptions = viewModel.finalStatus.mediaAttachments
       .compactMap(\.description)
-
+    
     if descriptions.count == 1 {
       return Text("accessibility.image.alt-text-\(descriptions[0])") + Text(", ")
     } else if descriptions.count > 1 {
@@ -380,28 +378,28 @@ private struct CombinedAccessibilityLabel {
       return Text("")
     }
   }
-
+  
   func pollText() -> Text {
     if let poll = viewModel.finalStatus.poll {
       let showPercentage = poll.expired || poll.voted ?? false
       let title: LocalizedStringKey = poll.expired
-        ? "accessibility.status.poll.finished.label"
-        : "accessibility.status.poll.active.label"
-
+      ? "accessibility.status.poll.finished.label"
+      : "accessibility.status.poll.active.label"
+      
       return poll.options.enumerated().reduce(into: Text(title)) { text, pair in
         let (index, option) = pair
         let selected = poll.ownVotes?.contains(index) ?? false
         let percentage = poll.safeVotersCount > 0 && option.votesCount != nil
-          ? Int(round(Double(option.votesCount!) / Double(poll.safeVotersCount) * 100))
-          : 0
-
+        ? Int(round(Double(option.votesCount!) / Double(poll.safeVotersCount) * 100))
+        : 0
+        
         text = text +
-          Text(selected ? "accessibility.status.poll.selected.label" : "") +
-          Text(", ") +
-          Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(poll.options.count)") +
-          Text(", ") +
-          Text(option.title) +
-          Text(showPercentage ? ", \(percentage)%. " : ". ")
+        Text(selected ? "accessibility.status.poll.selected.label" : "") +
+        Text(", ") +
+        Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(poll.options.count)") +
+        Text(", ") +
+        Text(option.title) +
+        Text(showPercentage ? ", \(percentage)%. " : ". ")
       }
     }
     return Text("")

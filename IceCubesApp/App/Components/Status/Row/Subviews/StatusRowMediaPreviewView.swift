@@ -16,38 +16,32 @@ public struct StatusRowMediaPreviewView: View {
   @Environment(UserPreferences.self) private var preferences
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
-
+  
   public let attachments: [MediaAttachment]
   public let sensitive: Bool
-
+  
   @State private var isQuickLookLoading: Bool = false
   @State private var altTextDisplayed: String?
   @State private var isAltAlertDisplayed: Bool = false
   @State private var isHidingMedia: Bool = false
-
+  
   var availableWidth: CGFloat {
     if UIDevice.current.userInterfaceIdiom == .phone &&
-      (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium
+        (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium
     {
       return sceneDelegate.windowWidth * 0.80
     }
     return sceneDelegate.windowWidth
   }
-
+  
   var appLayoutWidth: CGFloat {
-    let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
-    var sidebarWidth: CGFloat = 0
-    var secondaryColumnWidth: CGFloat = 0
+    let avatarColumnWidth: CGFloat = 0.0
+    let sidebarWidth: CGFloat = 0
+    let secondaryColumnWidth: CGFloat = 0
     let layoutPading: CGFloat = .layoutPadding * 2
-    if UIDevice.current.userInterfaceIdiom == .pad {
-      sidebarWidth = .sidebarWidth
-      if preferences.showiPadSecondaryColumn {
-        secondaryColumnWidth = .secondaryColumnWidth
-      }
-    }
     return layoutPading + avatarColumnWidth + sidebarWidth + extraLeadingInset + secondaryColumnWidth
   }
-
+  
   private var imageMaxHeight: CGFloat {
     if isCompact {
       return 50
@@ -63,7 +57,7 @@ public struct StatusRowMediaPreviewView: View {
     }
     return attachments.count > 2 ? 150 : 200
   }
-
+  
   private func size(for media: MediaAttachment) -> CGSize? {
     if let width = media.meta?.original?.width,
        let height = media.meta?.original?.height
@@ -72,7 +66,7 @@ public struct StatusRowMediaPreviewView: View {
     }
     return nil
   }
-
+  
   private func imageSize(from: CGSize, newWidth: CGFloat) -> CGSize {
     if isCompact || theme.statusDisplayStyle == .compact || isSecondaryColumn {
       return .init(width: imageMaxHeight, height: imageMaxHeight)
@@ -81,7 +75,7 @@ public struct StatusRowMediaPreviewView: View {
     let newHeight = from.height * ratio
     return .init(width: newWidth, height: newHeight)
   }
-
+  
   public var body: some View {
     Group {
       if attachments.count == 1, let attachment = attachments.first {
@@ -89,9 +83,6 @@ public struct StatusRowMediaPreviewView: View {
           .onTapGesture {
             quickLook.prepareFor(selectedMediaAttachment: attachment, mediaAttachments: attachments)
           }
-          .accessibilityElement(children: .ignore)
-          .accessibilityLabel(Self.accessibilityLabel(for: attachment))
-          .accessibilityAddTraits([.isButton, .isImage])
       } else {
         if isCompact || theme.statusDisplayStyle == .compact {
           HStack {
@@ -137,14 +128,14 @@ public struct StatusRowMediaPreviewView: View {
       }
     }
   }
-
+  
   @ViewBuilder
   private func makeAttachmentView(for index: Int) -> some View {
     if attachments.count > index {
       makePreview(attachment: attachments[index])
     }
   }
-
+  
   @ViewBuilder
   private func makeFeaturedImagePreview(attachment: MediaAttachment) -> some View {
     ZStack(alignment: .bottomLeading) {
@@ -172,7 +163,7 @@ public struct StatusRowMediaPreviewView: View {
         }
         .processors([.resize(size: newSize)])
         .frame(width: newSize.width, height: newSize.height)
-
+        
       case .gifv, .video, .audio:
         if let url = attachment.url {
           MediaUIAttachmentVideoView(viewModel: .init(url: url))
@@ -202,7 +193,7 @@ public struct StatusRowMediaPreviewView: View {
       }
     }
   }
-
+  
   @ViewBuilder
   private func makePreview(attachment: MediaAttachment) -> some View {
     if let type = attachment.supportedType, !isInCaptureMode {
@@ -273,37 +264,34 @@ public struct StatusRowMediaPreviewView: View {
       .onTapGesture {
         quickLook.prepareFor(selectedMediaAttachment: attachment, mediaAttachments: attachments)
       }
-      .accessibilityElement(children: .ignore)
-      .accessibilityLabel(Self.accessibilityLabel(for: attachment))
-      .accessibilityAddTraits(attachment.supportedType == .image ? [.isImage, .isButton] : .isButton)
     }
   }
-
+  
   private var sensitiveMediaOverlay: some View {
     ZStack {
       Rectangle()
         .foregroundColor(.clear)
         .background(.ultraThinMaterial)
       if !isCompact {
-        Button {
-          withAnimation {
-            isHidingMedia = false
-          }
-        } label: {
-          Group {
-            if sensitive {
-              Label("status.media.sensitive.show", systemImage: "eye")
-            } else {
-              Label("status.media.content.show", systemImage: "eye")
-            }
-          }
-          .foregroundColor(theme.labelColor)
+      Button {
+        withAnimation {
+          isHidingMedia = false
         }
-        .buttonStyle(.borderedProminent)
+      } label: {
+        Group {
+          if sensitive {
+            Label("status.media.sensitive.show", systemImage: "eye")
+          } else {
+            Label("status.media.content.show", systemImage: "eye")
+          }
+        }
+        .foregroundColor(theme.labelColor)
+      }
+      .buttonStyle(.borderedProminent)
       }
     }
   }
-
+  
   private var cornerSensitiveButton: some View {
     HStack {
       Button {
@@ -317,16 +305,6 @@ public struct StatusRowMediaPreviewView: View {
       .padding(10)
       .buttonStyle(.borderedProminent)
       Spacer()
-    }
-  }
-
-  private static func accessibilityLabel(for attachment: MediaAttachment) -> Text {
-    if let altText = attachment.description {
-      Text("accessibility.image.alt-text-\(altText)")
-    } else if let typeDescription = attachment.localizedTypeDescription {
-      Text(typeDescription)
-    } else {
-      Text("accessibility.tabs.profile.picker.media")
     }
   }
 }

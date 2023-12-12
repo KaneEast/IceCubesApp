@@ -1,8 +1,3 @@
-import DesignSystem
-import Env
-import Models
-import Network
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -26,7 +21,7 @@ public struct StatusDetailView: View {
     _viewModel = .init(wrappedValue: .init(statusId: statusId))
   }
 
-  public init(status: Status) {
+  public init(status: ModelsStatus) {
     _viewModel = .init(wrappedValue: .init(status: status))
   }
 
@@ -101,7 +96,7 @@ public struct StatusDetailView: View {
     .navigationBarTitleDisplayMode(.inline)
   }
 
-  private func makeStatusesListView(statuses: [Status]) -> some View {
+  private func makeStatusesListView(statuses: [ModelsStatus]) -> some View {
     ForEach(statuses) { status in
       let isReplyToPrevious = viewModel.isReplyToPreviousCache[status.id] ?? false
       let viewModel: StatusRowViewModel = .init(status: status,
@@ -146,7 +141,7 @@ public struct StatusDetailView: View {
   }
 
   private var loadingDetailView: some View {
-    ForEach(Status.placeholders()) { status in
+    ForEach(ModelsStatus.placeholders()) { status in
       StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         .redacted(reason: .placeholder)
         .allowsHitTesting(false)

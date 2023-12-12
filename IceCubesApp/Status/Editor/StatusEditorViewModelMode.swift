@@ -1,14 +1,14 @@
-import Models
+
 import SwiftUI
 import UIKit
 
 public extension StatusEditorViewModel {
   enum Mode {
-    case replyTo(status: Status)
-    case new(visibility: Models.Visibility)
-    case edit(status: Status)
-    case quote(status: Status)
-    case mention(account: Account, visibility: Models.Visibility)
+    case replyTo(status: ModelsStatus)
+    case new(visibility: Visibility)
+    case edit(status: ModelsStatus)
+    case quote(status: ModelsStatus)
+    case mention(account: Account, visibility: Visibility)
     case shareExtension(items: [NSItemProvider])
 
     var isInShareExtension: Bool {
@@ -29,7 +29,7 @@ public extension StatusEditorViewModel {
       }
     }
 
-    var replyToStatus: Status? {
+    var replyToStatus: ModelsStatus? {
       switch self {
       case let .replyTo(status):
         status

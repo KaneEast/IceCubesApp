@@ -1,7 +1,7 @@
-import Env
+
 import Foundation
-import Models
-import Network
+
+
 import SwiftUI
 
 @MainActor
@@ -13,7 +13,7 @@ import SwiftUI
   var routerPath: RouterPath?
 
   enum State {
-    case loading, display(statuses: [Status]), error(error: Error)
+    case loading, display(statuses: [ModelsStatus]), error(error: Error)
   }
 
   var state: State = .loading
@@ -29,7 +29,7 @@ import SwiftUI
     remoteStatusURL = nil
   }
 
-  init(status: Status) {
+  init(status: ModelsStatus) {
     state = .display(statuses: [status])
     title = "status.post-from-\(status.account.displayNameWithoutEmojis)"
     statusId = status.id
@@ -72,7 +72,7 @@ import SwiftUI
   }
 
   struct ContextData {
-    let status: Status
+    let status: ModelsStatus
     let context: StatusContext
   }
 
@@ -105,12 +105,12 @@ import SwiftUI
   }
 
   private func fetchContextData(client: Client, statusId: String) async throws -> ContextData {
-    async let status: Status = client.get(endpoint: Statuses.status(id: statusId))
+    async let status: ModelsStatus = client.get(endpoint: Statuses.status(id: statusId))
     async let context: StatusContext = client.get(endpoint: Statuses.context(id: statusId))
     return try await .init(status: status, context: context)
   }
 
-  private func cacheReplyTopPrevious(statuses: [Status]) {
+  private func cacheReplyTopPrevious(statuses: [ModelsStatus]) {
     isReplyToPreviousCache = [:]
     for status in statuses {
       var isReplyToPrevious: Bool = false

@@ -1,6 +1,6 @@
-import DesignSystem
-import Models
-import Network
+
+
+
 import SwiftUI
 
 @MainActor
@@ -73,7 +73,7 @@ public struct EditAccountView: View {
   private var postSettingsSection: some View {
     Section("account.edit.post-settings.section-title") {
       Picker(selection: $viewModel.postPrivacy) {
-        ForEach(Models.Visibility.supportDefault, id: \.rawValue) { privacy in
+        ForEach(Visibility.supportDefault, id: \.rawValue) { privacy in
           Text(privacy.title).tag(privacy)
         }
       } label: {

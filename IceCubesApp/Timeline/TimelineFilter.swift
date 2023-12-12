@@ -1,6 +1,6 @@
 import Foundation
-import Models
-import Network
+
+
 import SwiftUI
 
 public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
@@ -33,7 +33,7 @@ public enum TimelineFilter: Hashable, Equatable {
   case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
   case tagGroup(title: String, tags: [String])
-  case list(list: Models.List)
+  case list(list: ModelsList)
   case remoteLocal(server: String, filter: RemoteTimelineFilter)
   case latest
 
@@ -200,7 +200,7 @@ extension TimelineFilter: Codable {
       )
     case .list:
       let list = try container.decode(
-        Models.List.self,
+        ModelsList.self,
         forKey: .list
       )
       self = .list(list: list)

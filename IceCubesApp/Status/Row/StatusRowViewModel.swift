@@ -1,15 +1,15 @@
 import Combine
-import DesignSystem
-import Env
-import Models
+
+
+
 import NaturalLanguage
-import Network
+
 import Observation
 import SwiftUI
 
 @MainActor
 @Observable public class StatusRowViewModel {
-  let status: Status
+  let status: ModelsStatus
   // Whether this status is on a remote local timeline (many actions are unavailable if so)
   let isRemote: Bool
   let showActions: Bool
@@ -23,7 +23,7 @@ import SwiftUI
   private let userMentionned: Bool
 
   var isPinned: Bool
-  var embeddedStatus: Status?
+  var embeddedStatus: ModelsStatus?
   var displaySpoiler: Bool = false
   var isEmbedLoading: Bool = false
   var isFiltered: Bool = false
@@ -38,7 +38,7 @@ import SwiftUI
 
   var isLoadingRemoteContent: Bool = false
   var localStatusId: String?
-  var localStatus: Status?
+  var localStatus: ModelsStatus?
 
   // The relationship our user has to the author of this post, if available
   var authorRelationship: Relationship? {
@@ -103,7 +103,7 @@ import SwiftUI
     }
   }
 
-  public init(status: Status,
+  public init(status: ModelsStatus,
               client: Client,
               routerPath: RouterPath,
               isRemote: Bool = false,
@@ -230,7 +230,7 @@ import SwiftUI
 
     do {
       isEmbedLoading = true
-      var embed: Status?
+      var embed: ModelsStatus?
       if url.absoluteString.contains(client.server), let id = Int(url.lastPathComponent) {
         embed = try await client.get(endpoint: Statuses.status(id: String(id)))
       } else {
@@ -260,7 +260,7 @@ import SwiftUI
     guard client.isAuth else { return }
     isPinned = true
     do {
-      let status: Status = try await client.post(endpoint: Statuses.pin(id: finalStatus.id))
+      let status: ModelsStatus = try await client.post(endpoint: Statuses.pin(id: finalStatus.id))
       updateFromStatus(status: status)
     } catch {
       isPinned = false
@@ -271,7 +271,7 @@ import SwiftUI
     guard client.isAuth else { return }
     isPinned = false
     do {
-      let status: Status = try await client.post(endpoint: Statuses.unpin(id: finalStatus.id))
+      let status: ModelsStatus = try await client.post(endpoint: Statuses.unpin(id: finalStatus.id))
       updateFromStatus(status: status)
     } catch {
       isPinned = true
@@ -299,7 +299,7 @@ import SwiftUI
     } catch {}
   }
 
-  private func updateFromStatus(status: Status) {
+  private func updateFromStatus(status: ModelsStatus) {
     if let reblog = status.reblog {
       isPinned = reblog.pinned == true
     } else {

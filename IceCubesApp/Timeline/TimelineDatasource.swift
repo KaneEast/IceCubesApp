@@ -1,14 +1,14 @@
 import Foundation
-import Models
+
 
 actor TimelineDatasource {
-  private var statuses: [Status] = []
+  private var statuses: [ModelsStatus] = []
 
   var isEmpty: Bool {
     statuses.isEmpty
   }
 
-  func get() -> [Status] {
+  func get() -> [ModelsStatus] {
     statuses.filter { $0.filtered?.first?.filter.filterAction != .hide }
   }
 
@@ -24,27 +24,27 @@ actor TimelineDatasource {
     statuses.contains(where: { $0.id == statusId })
   }
 
-  func set(_ statuses: [Status]) {
+  func set(_ statuses: [ModelsStatus]) {
     self.statuses = statuses
   }
 
-  func append(_ status: Status) {
+  func append(_ status: ModelsStatus) {
     statuses.append(status)
   }
 
-  func append(contentOf: [Status]) {
+  func append(contentOf: [ModelsStatus]) {
     statuses.append(contentsOf: contentOf)
   }
 
-  func insert(_ status: Status, at: Int) {
+  func insert(_ status: ModelsStatus, at: Int) {
     statuses.insert(status, at: at)
   }
 
-  func insert(contentOf: [Status], at: Int) {
+  func insert(contentOf: [ModelsStatus], at: Int) {
     statuses.insert(contentsOf: contentOf, at: at)
   }
 
-  func replace(_ status: Status, at: Int) {
+  func replace(_ status: ModelsStatus, at: Int) {
     statuses[at] = status
   }
 

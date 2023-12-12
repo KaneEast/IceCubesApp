@@ -1,8 +1,8 @@
 import Combine
-import DesignSystem
-import Env
-import Models
-import Network
+
+
+
+
 import Observation
 
 import SwiftUI
@@ -28,7 +28,7 @@ struct DisplaySettingsView: View {
 
   @State private var isFontSelectorPresented = false
 
-  private let previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la"),
+  private let previewStatusViewModel = StatusRowViewModel(status: ModelsStatus.placeholder(forSettings: true, language: "la"),
                                                           client: Client(server: ""),
                                                           routerPath: RouterPath()) // translate from latin button
 

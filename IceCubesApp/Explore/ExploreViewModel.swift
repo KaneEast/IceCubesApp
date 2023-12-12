@@ -1,5 +1,5 @@
-import Models
-import Network
+
+
 import Observation
 import SwiftUI
 
@@ -51,7 +51,7 @@ import SwiftUI
   var suggestedAccounts: [Account] = []
   var suggestedAccountsRelationShips: [Relationship] = []
   var trendingTags: [Tag] = []
-  var trendingStatuses: [Status] = []
+  var trendingStatuses: [ModelsStatus] = []
   var trendingLinks: [Card] = []
   var searchScope: SearchScope = .all
   var scrollToTopVisible: Bool = false
@@ -80,14 +80,14 @@ import SwiftUI
   private struct TrendingData {
     let suggestedAccounts: [Account]
     let trendingTags: [Tag]
-    let trendingStatuses: [Status]
+    let trendingStatuses: [ModelsStatus]
     let trendingLinks: [Card]
   }
 
   private func fetchTrendingsData(client: Client) async throws -> TrendingData {
     async let suggestedAccounts: [Account] = client.get(endpoint: Accounts.suggestions)
     async let trendingTags: [Tag] = client.get(endpoint: Trends.tags)
-    async let trendingStatuses: [Status] = client.get(endpoint: Trends.statuses(offset: nil))
+    async let trendingStatuses: [ModelsStatus] = client.get(endpoint: Trends.statuses(offset: nil))
     async let trendingLinks: [Card] = client.get(endpoint: Trends.links)
     return try await .init(suggestedAccounts: suggestedAccounts,
                            trendingTags: trendingTags,

@@ -1,6 +1,6 @@
-import DesignSystem
-import Env
-import Models
+
+
+
 import SwiftUI
 
 struct StatusRowContentView: View {
@@ -29,7 +29,7 @@ struct StatusRowContentView: View {
          !isCompact,
          viewModel.isEmbedLoading || viewModel.embeddedStatus != nil
       {
-        StatusEmbeddedView(status: viewModel.embeddedStatus ?? Status.placeholder(),
+        StatusEmbeddedView(status: viewModel.embeddedStatus ?? ModelsStatus.placeholder(),
                            client: viewModel.client,
                            routerPath: viewModel.routerPath)
           .fixedSize(horizontal: false, vertical: true)

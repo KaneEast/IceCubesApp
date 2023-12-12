@@ -1,5 +1,5 @@
 import Foundation
-import Network
+
 import SwiftUI
 
 enum StatusEditorAIPrompt: CaseIterable {

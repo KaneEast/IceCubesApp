@@ -1,6 +1,6 @@
-import Env
-import Models
-import Network
+
+
+
 import Observation
 
 import SwiftUI
@@ -164,7 +164,7 @@ extension TimelineViewModel: StatusesFetcher {
       statusesState = .loading
     }
     
-    let statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+    let statuses: [ModelsStatus] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                               maxId: nil,
                                                                               minId: nil,
                                                                               offset: 0))
@@ -180,10 +180,10 @@ extension TimelineViewModel: StatusesFetcher {
   }
   
   // Fetch pages from the top most status of the tomeline.
-  private func fetchNewPagesFrom(latestStatus: Status, client: Client) async throws {
+  private func fetchNewPagesFrom(latestStatus: ModelsStatus, client: Client) async throws {
     canStreamEvents = false
     let initialTimeline = timeline
-    var newStatuses: [Status] = await fetchNewPages(minId: latestStatus.id, maxPages: 10)
+    var newStatuses: [ModelsStatus] = await fetchNewPages(minId: latestStatus.id, maxPages: 10)
     
     // Dedup statuses, a status with the same id could have been streamed in.
     let ids = await datasource.get().map(\.id)
@@ -261,15 +261,15 @@ extension TimelineViewModel: StatusesFetcher {
     }
   }
   
-  private func fetchNewPages(minId: String, maxPages: Int) async -> [Status] {
+  private func fetchNewPages(minId: String, maxPages: Int) async -> [ModelsStatus] {
     guard let client else { return [] }
     var pagesLoaded = 0
-    var allStatuses: [Status] = []
+    var allStatuses: [ModelsStatus] = []
     var latestMinId = minId
     do {
       while
         !Task.isCancelled,
-        let newStatuses: [Status] =
+        let newStatuses: [ModelsStatus] =
           try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                            maxId: nil,
                                                            minId: latestMinId,
@@ -296,7 +296,7 @@ extension TimelineViewModel: StatusesFetcher {
     do {
       guard let lastId = await datasource.get().last?.id else { return }
       statusesState = await .display(statuses: datasource.get(), nextPageState: .loadingNextPage)
-      let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+      let newStatuses: [ModelsStatus] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                    maxId: lastId,
                                                                                    minId: nil,
                                                                                    offset: datasource.get().count))
@@ -313,12 +313,12 @@ extension TimelineViewModel: StatusesFetcher {
     }
   }
   
-  func statusDidAppear(status: Status) {
+  func statusDidAppear(status: ModelsStatus) {
     pendingStatusesObserver.removeStatus(status: status)
     visibileStatusesIds.insert(status.id)
   }
   
-  func statusDidDisappear(status: Status) {
+  func statusDidDisappear(status: ModelsStatus) {
     visibileStatusesIds.remove(status.id)
   }
 }

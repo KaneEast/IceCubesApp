@@ -1,9 +1,9 @@
 
-import DesignSystem
-import EmojiText
-import Env
-import Models
-import Network
+
+
+
+
+
 import NukeUI
 import PhotosUI
 import StoreKit
@@ -264,7 +264,7 @@ public struct StatusEditorView: View {
   private var privacyMenu: some View {
     Menu {
       Section("status.editor.visibility") {
-        ForEach(Models.Visibility.allCases, id: \.self) { visibility in
+        ForEach(Visibility.allCases, id: \.self) { visibility in
           Button {
             viewModel.visibility = visibility
           } label: {

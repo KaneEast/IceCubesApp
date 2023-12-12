@@ -1,6 +1,6 @@
-import Env
-import Models
-import Network
+
+
+
 import Observation
 
 import SwiftUI
@@ -74,9 +74,9 @@ import SwiftUI
   var statusesState: StatusesState = .loading
 
   var relationship: Relationship?
-  var pinned: [Status] = []
-  var favorites: [Status] = []
-  var bookmarks: [Status] = []
+  var pinned: [ModelsStatus] = []
+  var favorites: [ModelsStatus] = []
+  var bookmarks: [ModelsStatus] = []
   private var favoritesNextPage: LinkHandler?
   private var bookmarksNextPage: LinkHandler?
   var featuredTags: [FeaturedTag] = []
@@ -104,7 +104,7 @@ import SwiftUI
   private(set) var account: Account?
   private var tabTask: Task<Void, Never>?
 
-  private(set) var statuses: [Status] = []
+  private(set) var statuses: [ModelsStatus] = []
 
   /// When coming from a URL like a mention tap in a status.
   init(accountId: String) {
@@ -211,7 +211,7 @@ import SwiftUI
       case .statuses, .postsAndReplies, .media:
         guard let lastId = statuses.last?.id else { return }
         tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .loadingNextPage))
-        let newStatuses: [Status] =
+        let newStatuses: [ModelsStatus] =
           try await client.get(endpoint: Accounts.statuses(id: accountId,
                                                            sinceId: lastId,
                                                            tag: nil,
@@ -224,14 +224,14 @@ import SwiftUI
                                                      nextPageState: newStatuses.count < 20 ? .none : .hasNextPage))
       case .favorites:
         guard let nextPageId = favoritesNextPage?.maxId else { return }
-        let newFavorites: [Status]
+        let newFavorites: [ModelsStatus]
         (newFavorites, favoritesNextPage) = try await client.getWithLink(endpoint: Accounts.favorites(sinceId: nextPageId))
         favorites.append(contentsOf: newFavorites)
         StatusDataControllerProvider.shared.updateDataControllers(for: newFavorites, client: client)
         tabState = .statuses(statusesState: .display(statuses: favorites, nextPageState: .hasNextPage))
       case .bookmarks:
         guard let nextPageId = bookmarksNextPage?.maxId else { return }
-        let newBookmarks: [Status]
+        let newBookmarks: [ModelsStatus]
         (newBookmarks, bookmarksNextPage) = try await client.getWithLink(endpoint: Accounts.bookmarks(sinceId: nextPageId))
         StatusDataControllerProvider.shared.updateDataControllers(for: newBookmarks, client: client)
         bookmarks.append(contentsOf: newBookmarks)
@@ -278,9 +278,9 @@ import SwiftUI
     }
   }
 
-  func statusDidAppear(status _: Models.Status) {}
+  func statusDidAppear(status _: ModelsStatus) {}
 
-  func statusDidDisappear(status _: Status) {}
+  func statusDidDisappear(status _: ModelsStatus) {}
 
   func translate(userLang: String) async {
     guard let account else { return }

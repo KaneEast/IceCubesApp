@@ -1,5 +1,5 @@
 import Combine
-import Models
+
 import Observation
 import SwiftUI
 
@@ -9,7 +9,7 @@ public enum StatusesState {
   }
 
   case loading
-  case display(statuses: [Status], nextPageState: StatusesState.PagingState)
+  case display(statuses: [ModelsStatus], nextPageState: StatusesState.PagingState)
   case error(error: Error)
 }
 
@@ -18,6 +18,6 @@ public protocol StatusesFetcher {
   var statusesState: StatusesState { get }
   func fetchNewestStatuses() async
   func fetchNextPage() async
-  func statusDidAppear(status: Status)
-  func statusDidDisappear(status: Status)
+  func statusDidAppear(status: ModelsStatus)
+  func statusDidDisappear(status: ModelsStatus)
 }

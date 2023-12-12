@@ -1,8 +1,8 @@
-import DesignSystem
-import Models
+
+
 import Nuke
 import NukeUI
-import Shimmer
+
 import SwiftUI
 
 public struct StatusRowCardView: View {

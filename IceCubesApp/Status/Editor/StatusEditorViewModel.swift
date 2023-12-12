@@ -1,9 +1,9 @@
 import Combine
-import DesignSystem
-import Env
-import Models
+
+
+
 import NaturalLanguage
-import Network
+
 import PhotosUI
 import SwiftUI
 
@@ -97,8 +97,8 @@ import SwiftUI
   var isMediasLoading: Bool = false
 
   var mediasImages: [StatusEditorMediaContainer] = []
-  var replyToStatus: Status?
-  var embeddedStatus: Status?
+  var replyToStatus: ModelsStatus?
+  var embeddedStatus: ModelsStatus?
 
   var customEmojis: [Emoji] = []
 
@@ -123,7 +123,7 @@ import SwiftUI
     return !modifiedStatusText.isEmpty && !mode.isInShareExtension
   }
 
-  var visibility: Models.Visibility = .pub
+  var visibility: Visibility = .pub
 
   var mentionsSuggestions: [Account] = []
   var tagsSuggestions: [Tag] = []
@@ -167,11 +167,11 @@ import SwiftUI
     }
   }
 
-  func postStatus() async -> Status? {
+  func postStatus() async -> ModelsStatus? {
     guard let client else { return nil }
     do {
       isPosting = true
-      let postStatus: Status?
+      let postStatus: ModelsStatus?
       var pollData: StatusData.PollData?
       if let pollOptions = getPollOptionsForAPI() {
         pollData = .init(options: pollOptions,
@@ -199,7 +199,7 @@ import SwiftUI
       isPosting = false
       return postStatus
     } catch {
-      if let error = error as? Models.ServerError {
+      if let error = error as? ServerError {
         postingError = error.error
         showPostingErrorAlert = true
       }

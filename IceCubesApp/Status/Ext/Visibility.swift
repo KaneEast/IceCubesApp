@@ -1,7 +1,7 @@
-import Models
+
 import SwiftUI
 
-public extension Models.Visibility {
+public extension Visibility {
   static var supportDefault: [Self] {
     [.pub, .priv, .unlisted]
   }

@@ -1,4 +1,4 @@
-import DesignSystem
+
 import SwiftUI
 
 /// A SwiftUI TextView implementation that supports both scrolling and auto-sizing layouts

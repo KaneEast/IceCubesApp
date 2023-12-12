@@ -1,4 +1,4 @@
-import Models
+
 import Nuke
 import Observation
 import SwiftUI
@@ -29,7 +29,7 @@ import UIKit
   }
 }
 
-private func getImages(for status: Status) -> [URL] {
+private func getImages(for status: ModelsStatus) -> [URL] {
   var urls = status.mediaAttachments.compactMap {
     if $0.supportedType == .image {
       return status.mediaAttachments.count > 1 ? $0.previewUrl ?? $0.url : $0.url

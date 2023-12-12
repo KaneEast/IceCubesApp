@@ -1,5 +1,5 @@
-import Models
-import Network
+
+
 import Observation
 import SwiftUI
 
@@ -20,7 +20,7 @@ import SwiftUI
 
   var displayName: String = ""
   var note: String = ""
-  var postPrivacy = Models.Visibility.pub
+  var postPrivacy = Visibility.pub
   var isSensitive: Bool = false
   var isBot: Bool = false
   var isLocked: Bool = false

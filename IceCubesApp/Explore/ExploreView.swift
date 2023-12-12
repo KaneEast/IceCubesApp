@@ -1,9 +1,9 @@
 
-import DesignSystem
-import Env
-import Models
-import Network
-import Shimmer
+
+
+
+
+
 
 import SwiftUI
 
@@ -33,7 +33,7 @@ public struct ExploreView: View {
         } else if !viewModel.searchQuery.isEmpty {
           if let results = viewModel.results[viewModel.searchQuery] {
             if results.isEmpty, !viewModel.isSearching {
-              EmptyView(iconName: "magnifyingglass",
+              DEmptyView(iconName: "magnifyingglass",
                         title: "explore.search.empty.title",
                         message: "explore.search.empty.message")
                 .listRowBackground(theme.secondaryBackgroundColor)
@@ -52,7 +52,7 @@ public struct ExploreView: View {
             .id(UUID())
           }
         } else if viewModel.allSectionsEmpty {
-          EmptyView(iconName: "magnifyingglass",
+          DEmptyView(iconName: "magnifyingglass",
                     title: "explore.search.title",
                     message: "explore.search.message-\(client.server)")
             .listRowBackground(theme.secondaryBackgroundColor)
@@ -145,7 +145,7 @@ public struct ExploreView: View {
   }
 
   private var loadingView: some View {
-    ForEach(Status.placeholders()) { status in
+    ForEach(ModelsStatus.placeholders()) { status in
       StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)

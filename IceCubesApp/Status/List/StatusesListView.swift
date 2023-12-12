@@ -1,8 +1,8 @@
-import DesignSystem
-import Env
-import Models
-import Network
-import Shimmer
+
+
+
+
+
 import SwiftUI
 
 @MainActor
@@ -29,7 +29,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   public var body: some View {
     switch fetcher.statusesState {
     case .loading:
-      ForEach(Status.placeholders()) { status in
+      ForEach(ModelsStatus.placeholders()) { status in
         StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)

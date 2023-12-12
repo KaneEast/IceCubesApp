@@ -39,8 +39,6 @@ struct PendingStatusesObserverView: View {
             // Accessibility: this results in a frame with a size of at least 44x44 at regular font size
             .frame(minWidth: 30, minHeight: 30)
         }
-        .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
-        .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
         .buttonStyle(.bordered)
         .background(.thinMaterial)
         .cornerRadius(8)

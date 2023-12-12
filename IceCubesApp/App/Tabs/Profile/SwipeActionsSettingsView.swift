@@ -46,7 +46,7 @@ struct SwipeActionsSettingsView: View {
       } footer: {
         Text("settings.swipeactions.status.explanation")
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
 
       Section {
         Picker(selection: $userPreferences.swipeActionsIconStyle, label: Text("settings.swipeactions.icon-style")) {
@@ -62,11 +62,11 @@ struct SwipeActionsSettingsView: View {
       } footer: {
         Text("settings.swipeactions.use-theme-colors-explanation")
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
     }
     .navigationTitle("settings.swipeactions.navigation-title")
     .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+    .background(.gray)
   }
 
   private func createStatusActionPicker(selection: Binding<StatusAction>, label: LocalizedStringKey) -> some View {

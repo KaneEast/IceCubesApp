@@ -65,13 +65,12 @@ public struct MediaUIAttachmentVideoView: View {
   public var body: some View {
     ZStack {
       VideoPlayer(player: viewModel.player)
-        .accessibilityAddTraits(.startsMediaSession)
 
       if !preferences.autoPlayVideo && !viewModel.forceAutoPlay {
         Image(systemName: "play.fill")
-          .font(isCompact ? .body : .largeTitle)
+          .font(.body)
           .foregroundColor(theme.tintColor)
-          .padding(.all, isCompact ? 6 : nil)
+          .padding(.all, 6)
           .background(Circle().fill(.thinMaterial))
           .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
       }

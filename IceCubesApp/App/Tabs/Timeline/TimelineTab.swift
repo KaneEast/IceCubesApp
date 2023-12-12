@@ -10,7 +10,7 @@ import SwiftUI
 @MainActor
 struct TimelineTab: View {
   @Environment(\.modelContext) private var context
-
+  
   @Environment(AppAccountsManager.self) private var appAccount
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
@@ -18,38 +18,38 @@ struct TimelineTab: View {
   @Environment(Client.self) private var client
   @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
-
+  
   @State private var didAppear: Bool = false
   @State private var timeline: TimelineFilter = .home
   @State private var selectedTagGroup: TagGroup?
   @State private var scrollToTopSignal: Int = 0
-
+  
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
-
+  
   @AppStorage("last_timeline_filter") var lastTimelineFilter: TimelineFilter = .home
-
+  
   private let canFilterTimeline: Bool
-
+  
   init(popToRootTab: Binding<Tab>, timeline: TimelineFilter? = nil) {
     canFilterTimeline = timeline == nil
     _popToRootTab = popToRootTab
     _timeline = .init(initialValue: timeline ?? .home)
   }
-
+  
   var body: some View {
     NavigationStack(path: $routerPath.path) {
       TimelineView(timeline: $timeline,
                    selectedTagGroup: $selectedTagGroup,
                    scrollToTopSignal: $scrollToTopSignal,
                    canFilterTimeline: canFilterTimeline)
-        .withAppRouter()
-        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-        .toolbar {
-          toolbarView
-        }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
-        .id(client.id)
+      .withAppRouter()
+      .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+      .toolbar {
+        toolbarView
+      }
+      .toolbarBackground(Color.white.opacity(0.50), for: .navigationBar)
+      .id(client.id)
     }
     .onAppear {
       routerPath.client = client
@@ -100,7 +100,7 @@ struct TimelineTab: View {
     .withSafariRouter()
     .environment(routerPath)
   }
-
+  
   @ViewBuilder
   private var timelineFilterButton: some View {
     if timeline.supportNewestPagination {
@@ -130,7 +130,7 @@ struct TimelineTab: View {
         }
       }
     }
-
+    
     if !currentAccount.tags.isEmpty {
       Menu("timeline.filter.tags") {
         ForEach(currentAccount.sortedTags) { tag in
@@ -142,7 +142,7 @@ struct TimelineTab: View {
         }
       }
     }
-
+    
     Menu("timeline.filter.local") {
       ForEach(localTimelines) { remoteLocal in
         Button {
@@ -159,7 +159,7 @@ struct TimelineTab: View {
         Label("timeline.filter.add-local", systemImage: "badge.plus.radiowaves.right")
       }
     }
-
+    
     Menu("timeline.filter.tag-groups") {
       ForEach(tagGroups) { group in
         Button {
@@ -174,16 +174,15 @@ struct TimelineTab: View {
       }
     }
   }
-
+  
   private var addAccountButton: some View {
     Button {
       routerPath.presentedSheet = .addAccount
     } label: {
       Image(systemName: "person.badge.plus")
     }
-    .accessibilityLabel("accessibility.tabs.timeline.add-account")
   }
-
+  
   @ToolbarContentBuilder
   private var toolbarView: some ToolbarContent {
     if canFilterTimeline {
@@ -192,17 +191,12 @@ struct TimelineTab: View {
       }
     }
     if client.isAuth {
-      if UIDevice.current.userInterfaceIdiom != .pad {
-        ToolbarItem(placement: .navigationBarLeading) {
-          AppAccountsSelectorView(routerPath: routerPath)
-            .id(currentAccount.account?.id)
-        }
+      ToolbarItem(placement: .navigationBarLeading) {
+        AppAccountsSelectorView(routerPath: routerPath)
+          .id(currentAccount.account?.id)
       }
       statusEditorToolbarItem(routerPath: routerPath,
                               visibility: preferences.postVisibility)
-      if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
-        SecondaryColumnToolbarItem()
-      }
     } else {
       ToolbarItem(placement: .navigationBarTrailing) {
         addAccountButton
@@ -237,7 +231,7 @@ struct TimelineTab: View {
       }
     }
   }
-
+  
   private func resetTimelineFilter() {
     if client.isAuth, canFilterTimeline {
       timeline = lastTimelineFilter

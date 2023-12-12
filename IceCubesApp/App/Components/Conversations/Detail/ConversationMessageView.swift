@@ -42,7 +42,7 @@ struct ConversationMessageView: View {
               routerPath.handleStatus(status: message, url: url)
             })
         }
-        .background(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor)
+        .background(isOwnMessage ? theme.tintColor.opacity(0.2) : .gray)
         .cornerRadius(8)
         .padding(.leading, isOwnMessage ? 24 : 0)
         .padding(.trailing, isOwnMessage ? 0 : 24)
@@ -159,11 +159,7 @@ struct ConversationMessageView: View {
   }
 
   private func mediaWidth(proxy: GeometryProxy) -> CGFloat {
-    var width = proxy.frame(in: .local).width
-    if UIDevice.current.userInterfaceIdiom == .pad {
-      width = width * 0.60
-    }
-    return width
+    proxy.frame(in: .local).width
   }
 
   private func makeMediaView(_ attachement: MediaAttachment) -> some View {

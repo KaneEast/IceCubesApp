@@ -1,9 +1,4 @@
 import Combine
-
-
-
-
-
 import SwiftUI
 
 @MainActor
@@ -26,7 +21,7 @@ struct AddRemoteTimelineView: View {
     NavigationStack {
       Form {
         TextField("timeline.add.url", text: $instanceName)
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(Color.white)
           .keyboardType(.URL)
           .textContentType(.URL)
           .textInputAutocapitalization(.never)
@@ -35,7 +30,7 @@ struct AddRemoteTimelineView: View {
         if let instance {
           Label("timeline.\(instance.title)-is-valid", systemImage: "checkmark.seal.fill")
             .foregroundColor(.green)
-            .listRowBackground(theme.primaryBackgroundColor)
+            .listRowBackground(Color.white)
         }
         Button {
           guard instance != nil else { return }
@@ -44,7 +39,7 @@ struct AddRemoteTimelineView: View {
         } label: {
           Text("timeline.add.action.add")
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(Color.white)
 
         instancesListView
       }
@@ -52,7 +47,7 @@ struct AddRemoteTimelineView: View {
       .navigationTitle("timeline.add-remote.title")
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      .background(.gray)
       .scrollDismissesKeyboard(.immediately)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -82,7 +77,7 @@ struct AddRemoteTimelineView: View {
     Section("instance.suggestions") {
       if instances.isEmpty {
         ProgressView()
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(Color.white)
       } else {
         ForEach(instanceName.isEmpty ? instances : instances.filter { $0.name.contains(instanceName.lowercased()) }) { instance in
           Button {
@@ -103,8 +98,8 @@ struct AddRemoteTimelineView: View {
                 .foregroundColor(.gray)
             }
           }
-          .listRowBackground(theme.primaryBackgroundColor)
-        }
+          .listRowBackground(Color.white)
+        }// End of ForEach
       }
     }
   }

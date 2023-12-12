@@ -4,8 +4,8 @@ import SwiftUI
 @Observable public class Theme {
   class ThemeStorage {
     enum ThemeKey: String {
-      case colorScheme, tint, label, primaryBackground, secondaryBackground
-      case avatarPosition2, avatarShape2, statusActionsDisplay, statusDisplayStyle
+      case colorScheme, tint, label
+      case avatarPosition2, avatarShape2, statusDisplayStyle
       case selectedSet, selectedScheme
       case followSystemColorSchme
       case displayFullUsernameTimeline
@@ -15,13 +15,9 @@ import SwiftUI
     @AppStorage("is_previously_set") public var isThemePreviouslySet: Bool = false
     @AppStorage(ThemeKey.selectedScheme.rawValue) public var selectedScheme: ColorScheme = .dark
     @AppStorage(ThemeKey.tint.rawValue) public var tintColor: Color = .black
-    @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color = .white
-    @AppStorage(ThemeKey.secondaryBackground.rawValue) public var secondaryBackgroundColor: Color = .gray
     @AppStorage(ThemeKey.label.rawValue) public var labelColor: Color = .black
-    @AppStorage(ThemeKey.avatarPosition2.rawValue) var avatarPosition: AvatarPosition = .top
     @AppStorage(ThemeKey.avatarShape2.rawValue) var avatarShape: AvatarShape = .rounded
     @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
-    @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay: StatusActionsDisplay = .full
     @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle: StatusDisplayStyle = .large
     @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool = true
     @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername: Bool = true
@@ -55,18 +51,6 @@ import SwiftUI
     }
   }
 
-  public enum AvatarPosition: String, CaseIterable {
-    case leading, top
-
-    public var description: LocalizedStringKey {
-      switch self {
-      case .leading:
-        "enum.avatar-position.leading"
-      case .top:
-        "enum.avatar-position.top"
-      }
-    }
-  }
 
   public enum AvatarShape: String, CaseIterable {
     case circle, rounded
@@ -77,21 +61,6 @@ import SwiftUI
         "enum.avatar-shape.circle"
       case .rounded:
         "enum.avatar-shape.rounded"
-      }
-    }
-  }
-
-  public enum StatusActionsDisplay: String, CaseIterable {
-    case full, discret, none
-
-    public var description: LocalizedStringKey {
-      switch self {
-      case .full:
-        "enum.status-actions-display.all"
-      case .discret:
-        "enum.status-actions-display.only-buttons"
-      case .none:
-        "enum.status-actions-display.no-buttons"
       }
     }
   }
@@ -155,27 +124,9 @@ import SwiftUI
     }
   }
 
-  public var primaryBackgroundColor: Color {
-    didSet {
-      themeStorage.primaryBackgroundColor = primaryBackgroundColor
-    }
-  }
-
-  public var secondaryBackgroundColor: Color {
-    didSet {
-      themeStorage.secondaryBackgroundColor = secondaryBackgroundColor
-    }
-  }
-
   public var labelColor: Color {
     didSet {
       themeStorage.labelColor = labelColor
-    }
-  }
-
-  public var avatarPosition: AvatarPosition {
-    didSet {
-      themeStorage.avatarPosition = avatarPosition
     }
   }
 
@@ -188,12 +139,6 @@ import SwiftUI
   private var storedSet: ColorSetName {
     didSet {
       themeStorage.storedSet = storedSet
-    }
-  }
-
-  public var statusActionsDisplay: StatusActionsDisplay {
-    didSet {
-      themeStorage.statusActionsDisplay = statusActionsDisplay
     }
   }
 
@@ -241,13 +186,9 @@ import SwiftUI
     isThemePreviouslySet = themeStorage.isThemePreviouslySet
     selectedScheme = themeStorage.selectedScheme
     tintColor = themeStorage.tintColor
-    primaryBackgroundColor = themeStorage.primaryBackgroundColor
-    secondaryBackgroundColor = themeStorage.secondaryBackgroundColor
     labelColor = themeStorage.labelColor
-    avatarPosition = themeStorage.avatarPosition
     avatarShape = themeStorage.avatarShape
     storedSet = themeStorage.storedSet
-    statusActionsDisplay = themeStorage.statusActionsDisplay
     statusDisplayStyle = themeStorage.statusDisplayStyle
     followSystemColorScheme = themeStorage.followSystemColorScheme
     displayFullUsername = themeStorage.displayFullUsername
@@ -283,8 +224,6 @@ import SwiftUI
     let colorSet = Theme.allColorSet.filter { $0.name == name }.first ?? IceCubeDark()
     selectedScheme = colorSet.scheme
     tintColor = colorSet.tintColor
-    primaryBackgroundColor = colorSet.primaryBackgroundColor
-    secondaryBackgroundColor = colorSet.secondaryBackgroundColor
     labelColor = colorSet.labelColor
     storedSet = name
   }

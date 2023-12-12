@@ -50,7 +50,7 @@ struct AddAccountView: View {
     NavigationStack {
       Form {
         TextField("instance.url", text: $instanceName)
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(Color.white)
           .keyboardType(.URL)
           .textContentType(.URL)
           .textInputAutocapitalization(.never)
@@ -75,7 +75,7 @@ struct AddAccountView: View {
       .navigationTitle("account.add.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      .background(.gray)
       .scrollDismissesKeyboard(.immediately)
       .toolbar {
         if !appAccountsManager.availableAccounts.isEmpty {
@@ -200,7 +200,7 @@ struct AddAccountView: View {
                 .foregroundColor(.gray)
             }
           }
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(Color.white)
         }
       }
     }
@@ -221,7 +221,7 @@ struct AddAccountView: View {
     .redacted(reason: .placeholder)
     .allowsHitTesting(false)
     .shimmering()
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(Color.white)
   }
 
   private func signIn() async {

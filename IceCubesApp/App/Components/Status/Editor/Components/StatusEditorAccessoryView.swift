@@ -78,7 +78,6 @@ struct StatusEditorAccessoryView: View {
               }))
               .background(.black)
             })
-            .accessibilityLabel("accessibility.editor.button.attach-photo")
             .disabled(viewModel.showPoll)
 
             Button {
@@ -89,7 +88,6 @@ struct StatusEditorAccessoryView: View {
             } label: {
               Image(systemName: "chart.bar")
             }
-            .accessibilityLabel("accessibility.editor.button.poll")
             .disabled(viewModel.shouldDisablePollButton)
 
             Button {
@@ -100,7 +98,6 @@ struct StatusEditorAccessoryView: View {
             } label: {
               Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
             }
-            .accessibilityLabel("accessibility.editor.button.spoiler")
 
             if !viewModel.mode.isInShareExtension {
               Button {
@@ -108,7 +105,6 @@ struct StatusEditorAccessoryView: View {
               } label: {
                 Image(systemName: "archivebox")
               }
-              .accessibilityLabel("accessibility.editor.button.drafts")
               .popover(isPresented: $isDraftsSheetDisplayed) {
                 if UIDevice.current.userInterfaceIdiom == .phone {
                   draftsListView
@@ -129,7 +125,6 @@ struct StatusEditorAccessoryView: View {
                 let customEmojiSheetIconName = colorScheme == .light ? "face.smiling" : "face.smiling.inverse"
                 Image(systemName: customEmojiSheetIconName)
               }
-              .accessibilityLabel("accessibility.editor.button.custom-emojis")
               .popover(isPresented: $isCustomEmojisSheetDisplay) {
                 if UIDevice.current.userInterfaceIdiom == .phone {
                   customEmojisSheet
@@ -149,7 +144,6 @@ struct StatusEditorAccessoryView: View {
                 Image(systemName: "globe")
               }
             }
-            .accessibilityLabel("accessibility.editor.button.language")
             .popover(isPresented: $isLanguageSheetDisplayed) {
               if UIDevice.current.userInterfaceIdiom == .phone {
                 languageSheetView
@@ -223,7 +217,6 @@ struct StatusEditorAccessoryView: View {
         ProgressView()
       } else {
         Image(systemName: "faxmachine")
-          .accessibilityLabel("accessibility.editor.button.ai-prompt")
       }
     }
   }
@@ -253,7 +246,7 @@ struct StatusEditorAccessoryView: View {
       .navigationTitle("status.editor.language-select.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      .background(.gray)
     }
   }
 
@@ -270,7 +263,7 @@ struct StatusEditorAccessoryView: View {
           Image(systemName: "checkmark")
         }
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
       .contentShape(Rectangle())
       .onTapGesture {
         viewModel.selectedLanguage = language.isoCode
@@ -291,13 +284,10 @@ struct StatusEditorAccessoryView: View {
                   .resizable()
                   .aspectRatio(contentMode: .fill)
                   .frame(width: 40, height: 40)
-                  .accessibilityLabel(emoji.shortcode.replacingOccurrences(of: "_", with: " "))
-                  .accessibilityAddTraits(.isButton)
               } else if state.isLoading {
                 Rectangle()
                   .fill(Color.gray)
                   .frame(width: 40, height: 40)
-                  .accessibility(hidden: true)
                   .shimmering()
               }
             }
@@ -313,7 +303,7 @@ struct StatusEditorAccessoryView: View {
         }
       }
       .scrollContentBackground(.hidden)
-      .background(theme.primaryBackgroundColor)
+      .background(Color.white)
       .navigationTitle("status.editor.emojis.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
     }
@@ -327,11 +317,6 @@ struct StatusEditorAccessoryView: View {
     Text("\(value)")
       .foregroundColor(value < 0 ? .red : .secondary)
       .font(.scaledCallout)
-      .accessibilityLabel("accessibility.editor.button.characters-remaining")
-      .accessibilityValue("\(value)")
-      .accessibilityRemoveTraits(.isStaticText)
-      .accessibilityAddTraits(.updatesFrequently)
-      .accessibilityRespondsToUserInteraction(false)
   }
 
   private var recentlyUsedLanguages: [Language] {

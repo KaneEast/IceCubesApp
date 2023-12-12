@@ -9,23 +9,19 @@ struct ExploreTab: View {
   @State private var routerPath = RouterPath()
   @State private var scrollToTopSignal: Int = 0
   @Binding var popToRootTab: Tab
-
+  
   var body: some View {
     NavigationStack(path: $routerPath.path) {
       ExploreView(scrollToTopSignal: $scrollToTopSignal)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+        .toolbarBackground(Color.white.opacity(0.50), for: .navigationBar)
         .toolbar {
           statusEditorToolbarItem(routerPath: routerPath,
                                   visibility: preferences.postVisibility)
-          if UIDevice.current.userInterfaceIdiom != .pad {
-            ToolbarItem(placement: .navigationBarLeading) {
-              AppAccountsSelectorView(routerPath: routerPath)
-            }
-          }
-          if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
-            SecondaryColumnToolbarItem()
+          
+          ToolbarItem(placement: .navigationBarLeading) {
+            AppAccountsSelectorView(routerPath: routerPath)
           }
         }
     }

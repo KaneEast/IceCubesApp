@@ -44,9 +44,6 @@
     ", " : {
 
     },
-    ", %lld%%" : {
-
-    },
     ", %lld%%. " : {
 
     },
@@ -110,17 +107,8 @@
         }
       }
     },
-    "%@@%@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@@%2$@"
-          }
-        }
-      }
-    },
     "%@©2023 Thomas Ricouard" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -183,7 +171,7 @@
         }
       }
     },
-    "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)" : {
+    "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)" : {
 
     },
     "⚠︎" : {
@@ -6977,6 +6965,7 @@
       }
     },
     "accessibility.tabs.timeline.add-account" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -9009,6 +8998,7 @@
       }
     },
     "account.action.more" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -28898,6 +28888,7 @@
       }
     },
     "iPad" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -28926,6 +28917,7 @@
       }
     },
     "iPhone" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -28952,6 +28944,9 @@
           }
         }
       }
+    },
+    "Libraries" : {
+
     },
     "lists.add-remove-%@" : {
       "comment" : "MARK: Package: Lists",
@@ -35109,6 +35104,7 @@
       }
     },
     "settings.about.built-with" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -35227,6 +35223,7 @@
       }
     },
     "settings.about.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -35820,6 +35817,7 @@
       }
     },
     "settings.app.icon" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -36057,6 +36055,7 @@
       }
     },
     "settings.app.icon.navigation-title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -36294,6 +36293,7 @@
       }
     },
     "settings.app.source" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -39012,6 +39012,7 @@
       }
     },
     "settings.display.avatar.position" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -41022,6 +41023,7 @@
       }
     },
     "settings.display.show-ipad-column" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -41140,6 +41142,7 @@
       }
     },
     "settings.display.show-tab-label" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -41258,6 +41261,7 @@
       }
     },
     "settings.display.status.action-buttons" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -41494,6 +41498,7 @@
       }
     },
     "settings.display.theme.background" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -41612,6 +41617,7 @@
       }
     },
     "settings.display.theme.secondary-background" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -45991,6 +45997,7 @@
       }
     },
     "settings.rate" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -48008,6 +48015,7 @@
       }
     },
     "settings.support.privacy-policy" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -48840,6 +48848,7 @@
       }
     },
     "settings.support.terms-of-use" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {

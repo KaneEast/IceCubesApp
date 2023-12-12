@@ -25,7 +25,6 @@ struct ConversationsListRow: View {
       VStack(alignment: .leading) {
         HStack(alignment: .top, spacing: 8) {
           AvatarView(url: conversation.accounts.first!.avatar)
-            .accessibilityHidden(true)
           VStack(alignment: .leading, spacing: 4) {
             HStack {
               EmojiTextApp(.init(stringValue: conversation.accounts.map(\.safeDisplayName).joined(separator: ", ")),
@@ -42,10 +41,6 @@ struct ConversationsListRow: View {
                 Circle()
                   .foregroundColor(theme.tintColor)
                   .frame(width: 10, height: 10)
-                  .accessibilityRepresentation {
-                    Text("accessibility.tabs.messages.unread.label")
-                  }
-                  .accessibilitySortPriority(1)
               }
               if let message = conversation.lastStatus {
                 Text(message.createdAt.relativeFormatted)
@@ -58,7 +53,6 @@ struct ConversationsListRow: View {
               .foregroundColor(theme.labelColor)
               .emojiSize(Font.scaledBodyFont.emojiSize)
               .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
-              .accessibilityLabel(conversation.lastStatus?.content.asRawText ?? "")
           }
           Spacer()
         }
@@ -66,24 +60,10 @@ struct ConversationsListRow: View {
         if conversation.lastStatus != nil {
           actionsView
             .padding(.bottom, 4)
-            .accessibilityHidden(true)
         }
       }
       .contextMenu {
         contextMenu
-          .accessibilityHidden(true)
-      }
-      .accessibilityElement(children: .combine)
-      .accessibilityActions {
-        replyAction
-        contextMenu
-        accessibilityActions
-      }
-      .accessibilityAction(.magicTap) {
-        if let lastStatus = conversation.lastStatus {
-          HapticManager.shared.fireHaptic(of: .notification(.success))
-          routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
-        }
       }
     }
   }
@@ -166,54 +146,6 @@ struct ConversationsListRow: View {
     } label: {
       Label(conversation.lastStatus?.bookmarked ?? false ? "status.action.unbookmark" : "status.action.bookmark",
             systemImage: conversation.lastStatus?.bookmarked ?? false ? "bookmark.fill" : "bookmark")
-    }
-  }
-
-  // MARK: - Accessibility actions
-
-  @ViewBuilder
-  var replyAction: some View {
-    if let lastStatus = conversation.lastStatus {
-      Button("status.action.reply") {
-        HapticManager.shared.fireHaptic(of: .notification(.success))
-        routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
-      }
-    } else {
-      EmptyView()
-    }
-  }
-
-  @ViewBuilder
-  private var accessibilityActions: some View {
-    if let lastStatus = conversation.lastStatus {
-      if lastStatus.account.id != currentAccount.account?.id {
-        Button("@\(lastStatus.account.username)") {
-          HapticManager.shared.fireHaptic(of: .notification(.success))
-          routerPath.navigate(to: .accountDetail(id: lastStatus.account.id))
-        }
-      }
-      // Add in each detected link in the content
-      ForEach(lastStatus.content.links) { link in
-        switch link.type {
-        case .url:
-          if UIApplication.shared.canOpenURL(link.url) {
-            Button("accessibility.tabs.timeline.content-link-\(link.title)") {
-              HapticManager.shared.fireHaptic(of: .notification(.success))
-              _ = routerPath.handle(url: link.url)
-            }
-          }
-        case .hashtag:
-          Button("accessibility.tabs.timeline.content-hashtag-\(link.title)") {
-            HapticManager.shared.fireHaptic(of: .notification(.success))
-            _ = routerPath.handle(url: link.url)
-          }
-        case .mention:
-          Button("\(link.title)") {
-            HapticManager.shared.fireHaptic(of: .notification(.success))
-            _ = routerPath.handle(url: link.url)
-          }
-        }
-      }
     }
   }
 }

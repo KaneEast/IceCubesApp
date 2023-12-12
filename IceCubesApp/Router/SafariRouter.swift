@@ -1,8 +1,11 @@
-
-
 import Observation
 import SafariServices
 import SwiftUI
+
+public enum PreferredBrowser: Int, CaseIterable {
+  case inAppSafari
+  case safari
+}
 
 extension View {
   @MainActor func withSafariRouter() -> some View {
@@ -74,7 +77,7 @@ private struct SafariRouter: ViewModifier {
     configuration.entersReaderIfAvailable = UserPreferences.shared.inAppBrowserReaderView
 
     let safari = SFSafariViewController(url: url, configuration: configuration)
-    safari.preferredBarTintColor = UIColor(Theme.shared.primaryBackgroundColor)
+    safari.preferredBarTintColor = UIColor(.white)
     safari.preferredControlTintColor = UIColor(Theme.shared.tintColor)
     safari.delegate = self
 

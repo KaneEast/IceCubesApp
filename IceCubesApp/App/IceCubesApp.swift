@@ -1,11 +1,5 @@
-
-
 import AVFoundation
-
-
 import KeychainSwift
-
-
 import SwiftUI
 
 @main
@@ -34,7 +28,7 @@ struct IceCubesApp: App {
   
   var body: some Scene {
     WindowGroup {
-      appView
+      tabBarView
         .applyTheme(theme)
         .onAppear {
           setNewClientsInEnv(client: appAccountsManager.currentClient)
@@ -77,66 +71,15 @@ struct IceCubesApp: App {
     }
   }
   
-  @ViewBuilder
-  private var appView: some View {
-    if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
-      sidebarView
-    } else {
-      tabBarView
-    }
-  }
-  
-  private var sidebarView: some View {
-    SideBarView(selectedTab: $selectedTab,
-                popToRootTab: $popToRootTab,
-                tabs: availableTabs)
-    {
-      HStack(spacing: 0) {
-        ZStack {
-          if selectedTab == .profile {
-            ProfileTab(popToRootTab: $popToRootTab)
-          }
-          ForEach(availableTabs) { tab in
-            if tab == selectedTab || sideBarLoadedTabs.contains(tab) {
-              tab
-                .makeContentView(popToRootTab: $popToRootTab)
-                .opacity(tab == selectedTab ? 1 : 0)
-                .transition(.opacity)
-                .id("\(tab)\(appAccountsManager.currentAccount.id)")
-                .onAppear {
-                  sideBarLoadedTabs.insert(tab)
-                }
-            } else {
-              EmptyView()
-            }
-          }
-        }
-        if appAccountsManager.currentClient.isAuth,
-           userPreferences.showiPadSecondaryColumn
-        {
-          Divider().edgesIgnoringSafeArea(.all)
-        }
-      }
-    }.onChange(of: $appAccountsManager.currentAccount.id) {
-      sideBarLoadedTabs.removeAll()
-    }
-    .environment(sidebarRouterPath)
-  }
-  
-  
   private var tabBarView: some View {
     TabView {
       ForEach(availableTabs) { tab in
         tab.makeContentView(popToRootTab: $popToRootTab)
           .tabItem {
-            if userPreferences.showiPhoneTabLabel {
-              tab.label
-            } else {
-              Image(systemName: tab.iconName)
-            }
+            tab.label
           }
           .tag(tab)
-          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
+          .toolbarBackground(Color.white.opacity(0.50), for: .tabBar)
       }
     }
     .id(appAccountsManager.currentClient.id)

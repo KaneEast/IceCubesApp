@@ -19,7 +19,7 @@ public struct ThemePreviewView: View {
     }
     .padding(4)
     .frame(maxHeight: .infinity)
-    .background(theme.primaryBackgroundColor)
+    .background(Color.white)
     .navigationTitle("design.theme.navigation-title")
   }
 }

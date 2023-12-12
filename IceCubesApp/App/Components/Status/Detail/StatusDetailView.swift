@@ -49,12 +49,11 @@ public struct StatusDetailView: View {
             }
 
             Rectangle()
-              .foregroundColor(theme.secondaryBackgroundColor)
+              .foregroundColor(.gray)
               .frame(minHeight: reader.frame(in: .local).size.height - statusHeight)
               .listRowSeparator(.hidden)
-              .listRowBackground(theme.secondaryBackgroundColor)
+              .listRowBackground(Color.gray)
               .listRowInsets(.init())
-              .accessibilityHidden(true)
 
           case .error:
             errorView
@@ -63,7 +62,7 @@ public struct StatusDetailView: View {
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
+        .background(Color.white)
         .onChange(of: viewModel.scrollToId) { _, newValue in
           if let newValue {
             viewModel.scrollToId = nil
@@ -136,7 +135,7 @@ public struct StatusDetailView: View {
         await viewModel.fetch()
       }
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(Color.white)
     .listRowSeparator(.hidden)
   }
 
@@ -156,16 +155,15 @@ public struct StatusDetailView: View {
     }
     .frame(height: 50)
     .listRowSeparator(.hidden)
-    .listRowBackground(theme.secondaryBackgroundColor)
+    .listRowBackground(Color.gray)
     .listRowInsets(.init())
   }
 
   private var topPaddingView: some View {
     HStack { EmptyView() }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
       .listRowSeparator(.hidden)
       .listRowInsets(.init())
       .frame(height: .layoutPadding)
-      .accessibilityHidden(true)
   }
 }

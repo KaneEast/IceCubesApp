@@ -17,10 +17,10 @@ struct HapticSettingsView: View {
         Toggle("settings.haptic.tab-selection", isOn: $userPreferences.hapticTabSelectionEnabled)
         Toggle("settings.haptic.buttons", isOn: $userPreferences.hapticButtonPressEnabled)
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
     }
     .navigationTitle("settings.haptic.navigation-title")
     .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+    .background(.gray)
   }
 }

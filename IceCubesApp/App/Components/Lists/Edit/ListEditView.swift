@@ -26,7 +26,7 @@ public struct ListEditView: View {
               ProgressView()
               Spacer()
             }
-            .listRowBackground(theme.primaryBackgroundColor)
+            .listRowBackground(Color.white)
           } else {
             ForEach(viewModel.accounts) { account in
               HStack {
@@ -41,7 +41,7 @@ public struct ListEditView: View {
                     .font(.scaledFootnote)
                 }
               }
-              .listRowBackground(theme.primaryBackgroundColor)
+              .listRowBackground(Color.white)
             }.onDelete { indexes in
               if let index = indexes.first {
                 Task {
@@ -54,7 +54,7 @@ public struct ListEditView: View {
         }
       }
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      .background(.gray)
       .toolbar {
         ToolbarItem {
           Button("action.done") {

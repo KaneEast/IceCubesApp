@@ -79,7 +79,7 @@ public struct AccountDetailView: View {
       .environment(\.defaultMinListRowHeight, 1)
       .listStyle(.plain)
       .scrollContentBackground(.hidden)
-      .background(theme.primaryBackgroundColor)
+      .background(Color.white)
       .onChange(of: scrollToTopSignal) {
         withAnimation {
           proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
@@ -226,7 +226,7 @@ public struct AccountDetailView: View {
           Spacer()
           Image(systemName: "chevron.right")
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(Color.white)
       }
     }.task {
       await currentAccount.fetchFollowedTags()
@@ -241,7 +241,7 @@ public struct AccountDetailView: View {
             .font(.scaledHeadline)
             .foregroundColor(theme.labelColor)
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(Color.white)
         .contextMenu {
           Button("account.list.delete", role: .destructive) {
             Task {
@@ -255,7 +255,7 @@ public struct AccountDetailView: View {
       }
       .tint(theme.tintColor)
       .buttonStyle(.borderless)
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
     }
     .task {
       await currentAccount.fetchLists()
@@ -291,12 +291,12 @@ public struct AccountDetailView: View {
                              bottom: 0,
                              trailing: .layoutPadding))
         .listRowSeparator(.hidden)
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(Color.white)
       ForEach(viewModel.pinned) { status in
         StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
       }
       Rectangle()
-        .fill(theme.secondaryBackgroundColor)
+        .fill(.gray)
         .frame(height: 12)
         .listRowInsets(.init())
         .listRowSeparator(.hidden)
@@ -397,7 +397,7 @@ extension View {
   func applyAccountDetailsRowStyle(theme: Theme) -> some View {
     listRowInsets(.init())
       .listRowSeparator(.hidden)
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
   }
 }
 

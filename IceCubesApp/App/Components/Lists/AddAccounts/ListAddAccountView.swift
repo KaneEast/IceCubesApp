@@ -38,15 +38,15 @@ public struct ListAddAccountView: View {
             .disabled(viewModel.isLoadingInfo)
             Spacer()
           }
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(Color.white)
         }
         Button("lists.create") {
           isCreateListAlertPresented = true
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(Color.white)
       }
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      .background(.gray)
       .navigationTitle("lists.add-remove-\(viewModel.account.safeDisplayName)")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {

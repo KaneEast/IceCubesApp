@@ -1,8 +1,3 @@
-
-
-
-
-
 import SwiftUI
 
 @MainActor
@@ -17,7 +12,7 @@ struct ContentSettingsView: View {
         Toggle(isOn: $userPreferences.suppressDupeReblogs) {
           Text("settings.content.hide-repeated-boosts")
         }
-      }.listRowBackground(theme.primaryBackgroundColor)
+      }.listRowBackground(Color.white)
 
       Section("settings.content.media") {
         Toggle(isOn: $userPreferences.autoPlayVideo) {
@@ -26,7 +21,7 @@ struct ContentSettingsView: View {
         Toggle(isOn: $userPreferences.showAltTextForMedia) {
           Text("settings.content.media.show.alt")
         }
-      }.listRowBackground(theme.primaryBackgroundColor)
+      }.listRowBackground(Color.white)
 
       Section("settings.content.sharing") {
         Picker("settings.content.sharing.share-button-behavior", selection: $userPreferences.shareButtonBehavior) {
@@ -36,14 +31,14 @@ struct ContentSettingsView: View {
           }
         }
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
 
       Section("settings.content.instance-settings") {
         Toggle(isOn: $userPreferences.useInstanceContentSettings) {
           Text("settings.content.use-instance-settings")
         }
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
       .onChange(of: userPreferences.useInstanceContentSettings) { _, newVal in
         if newVal {
           userPreferences.appAutoExpandSpoilers = userPreferences.autoExpandSpoilers
@@ -74,7 +69,7 @@ struct ContentSettingsView: View {
       } footer: {
         Text("settings.content.collapse-long-posts-hint")
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
 
       Section("settings.content.posting") {
         Picker("settings.content.default-visibility", selection: $userPreferences.appDefaultPostVisibility) {
@@ -103,10 +98,10 @@ struct ContentSettingsView: View {
         .disabled(userPreferences.useInstanceContentSettings)
       }
 
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
     }
     .navigationTitle("settings.content.navigation-title")
     .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+    .background(.gray)
   }
 }

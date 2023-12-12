@@ -18,10 +18,10 @@ public struct EditRelationshipNoteView: View {
           TextField("account.relation.note.edit.placeholder", text: $viewModel.note, axis: .vertical)
             .frame(minHeight: 150, maxHeight: 150, alignment: .top)
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(Color.white)
       }
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      .background(.gray)
       .navigationTitle("account.relation.note.edit")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {

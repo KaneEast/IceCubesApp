@@ -67,13 +67,13 @@ struct SideBarView<Content: View>: View {
       }
     } label: {
       ZStack(alignment: .topTrailing) {
-        AppAccountView(viewModel: .init(appAccount: account, isCompact: true))
+        AppAccountView(viewModel: .init(appAccount: account))
       }
     }
     .frame(width: .sidebarWidth, height: 50)
     .padding(.vertical, 8)
     .background(selectedTab == .profile && account.id == appAccounts.currentAccount.id ?
-      theme.secondaryBackgroundColor : .clear)
+      .gray : .clear)
   }
 
   private var tabsView: some View {
@@ -92,7 +92,7 @@ struct SideBarView<Content: View>: View {
         SoundEffectManager.shared.playSound(of: .tabSelection)
       } label: {
       }
-      .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
+      .background(tab == selectedTab ? .gray : .clear)
     }
   }
 

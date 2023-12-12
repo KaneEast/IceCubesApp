@@ -11,7 +11,6 @@ import SwiftUI
 
   var appAccount: AppAccount
   let client: Client
-  let isCompact: Bool
   let isInNavigation: Bool
   let showBadge: Bool
 
@@ -31,9 +30,8 @@ import SwiftUI
     }
   }
 
-  public init(appAccount: AppAccount, isCompact: Bool = false, isInNavigation: Bool = true, showBadge: Bool = false) {
+  public init(appAccount: AppAccount, isInNavigation: Bool = true, showBadge: Bool = false) {
     self.appAccount = appAccount
-    self.isCompact = isCompact
     self.isInNavigation = isInNavigation
     self.showBadge = showBadge
     client = .init(server: appAccount.server, oauthToken: appAccount.oauthToken)

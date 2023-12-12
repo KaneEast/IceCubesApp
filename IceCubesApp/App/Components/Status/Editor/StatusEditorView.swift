@@ -1,14 +1,12 @@
-
-
-
-
-
-
 import NukeUI
 import PhotosUI
 import StoreKit
 import SwiftUI
 import UIKit
+
+public enum NotificationsName {
+  public static let shareSheetClose = NSNotification.Name("shareSheetClose")
+}
 
 @MainActor
 public struct StatusEditorView: View {
@@ -70,7 +68,6 @@ public struct StatusEditorView: View {
           .padding(.top, 8)
           .padding(.bottom, 40)
         }
-        .accessibilitySortPriority(1) // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
         .padding(.top, 1) // hacky fix for weird SwiftUI scrollView bug when adding padding
         .padding(.bottom, 48)
         VStack(alignment: .leading, spacing: 0) {
@@ -99,7 +96,7 @@ public struct StatusEditorView: View {
       .onChange(of: currentAccount.account?.id) {
         viewModel.currentAccount = currentAccount.account
       }
-      .background(theme.primaryBackgroundColor)
+      .background(Color.white)
       .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(.visible, for: .navigationBar)
@@ -248,7 +245,6 @@ public struct StatusEditorView: View {
         } else {
           AvatarView(url: account.avatar, size: .status)
             .environment(theme)
-            .accessibilityHidden(true)
         }
         VStack(alignment: .leading, spacing: 4) {
           privacyMenu
@@ -275,9 +271,6 @@ public struct StatusEditorView: View {
     } label: {
       HStack {
         Label(viewModel.visibility.title, systemImage: viewModel.visibility.iconName)
-          .accessibilityLabel("accessibility.editor.privacy.label")
-          .accessibilityValue(viewModel.visibility.title)
-          .accessibilityHint("accessibility.editor.privacy.hint")
         Image(systemName: "chevron.down")
       }
       .font(.scaledFootnote)

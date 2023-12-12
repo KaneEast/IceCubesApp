@@ -59,7 +59,7 @@ public struct TimelineView: View {
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
+        .background(Color.white)
         .introspect(.list, on: .iOS(.v17)) { (collectionView: UICollectionView) in
           DispatchQueue.main.async {
             self.collectionView = collectionView
@@ -160,7 +160,6 @@ public struct TimelineView: View {
               .font(.scaledFootnote)
               .foregroundColor(.gray)
           }
-          .accessibilityElement(children: .combine)
           Spacer()
           Button {
             Task {
@@ -211,7 +210,7 @@ public struct TimelineView: View {
       content()
       Spacer()
     }
-    .listRowBackground(theme.secondaryBackgroundColor)
+    .listRowBackground(Color.gray)
     .listRowSeparator(.hidden)
     .listRowInsets(.init(top: 8,
                          leading: .layoutPadding,
@@ -235,25 +234,6 @@ public struct TimelineView: View {
             .font(.headline)
         }
       }
-      .accessibilityRepresentation {
-        switch timeline {
-        case let .remoteLocal(_, filter):
-          if canFilterTimeline {
-            Menu(filter.localizedTitle()) {}
-          } else {
-            Text(filter.localizedTitle())
-          }
-        default:
-          if canFilterTimeline {
-            Menu(timeline.localizedTitle()) {}
-          } else {
-            Text(timeline.localizedTitle())
-          }
-        }
-      }
-      .accessibilityAddTraits(.isHeader)
-      .accessibilityRemoveTraits(.isButton)
-      .accessibilityRespondsToUserInteraction(canFilterTimeline)
     }
   }
   

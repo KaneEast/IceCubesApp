@@ -72,7 +72,7 @@ public struct AppAccountsSelectorView: View {
     if #available(iOS 16.4, *) {
       Color.clear
     } else {
-      theme.secondaryBackgroundColor
+      .gray
     }
   }
 
@@ -84,7 +84,7 @@ public struct AppAccountsSelectorView: View {
             AppAccountView(viewModel: viewModel)
           }
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(Color.white)
 
         if accountCreationEnabled {
           Section {
@@ -99,7 +99,7 @@ public struct AppAccountsSelectorView: View {
             }
             settingsButton
           }
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(Color.white)
         }
       }
       .listStyle(.insetGrouped)

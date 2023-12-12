@@ -11,3 +11,10 @@ extension Data {
       .replacingOccurrences(of: "=", with: "")
   }
 }
+
+
+extension String {
+  var localized: String {
+    NSLocalizedString(self, comment: "")
+  }
+}

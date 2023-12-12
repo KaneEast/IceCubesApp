@@ -69,7 +69,7 @@ public struct ConversationDetailView: View {
     }
     .navigationBarTitleDisplayMode(.inline)
     .scrollContentBackground(.hidden)
-    .background(theme.primaryBackgroundColor)
+    .background(Color.white)
     .toolbar {
       ToolbarItem(placement: .principal) {
         if viewModel.conversation.accounts.count == 1,
@@ -112,7 +112,6 @@ public struct ConversationDetailView: View {
       .fill(Color.clear)
       .frame(height: 40)
       .id(Constants.bottomAnchor)
-      .accessibilityHidden(true)
   }
 
   private var inputTextView: some View {

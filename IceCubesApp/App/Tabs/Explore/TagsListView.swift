@@ -15,12 +15,12 @@ public struct TagsListView: View {
     List {
       ForEach(tags) { tag in
         TagRowView(tag: tag)
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(Color.white)
           .padding(.vertical, 4)
       }
     }
     .scrollContentBackground(.hidden)
-    .background(theme.primaryBackgroundColor)
+    .background(Color.white)
     .listStyle(.plain)
     .navigationTitle("explore.section.trending.tags")
     .navigationBarTitleDisplayMode(.inline)

@@ -36,7 +36,7 @@ public struct ExploreView: View {
               DEmptyView(iconName: "magnifyingglass",
                         title: "explore.search.empty.title",
                         message: "explore.search.empty.message")
-                .listRowBackground(theme.secondaryBackgroundColor)
+                .listRowBackground(Color.gray)
                 .listRowSeparator(.hidden)
             } else {
               makeSearchResultsView(results: results)
@@ -47,7 +47,7 @@ public struct ExploreView: View {
               ProgressView()
               Spacer()
             }
-            .listRowBackground(theme.secondaryBackgroundColor)
+            .listRowBackground(Color.gray)
             .listRowSeparator(.hidden)
             .id(UUID())
           }
@@ -55,7 +55,7 @@ public struct ExploreView: View {
           DEmptyView(iconName: "magnifyingglass",
                     title: "explore.search.title",
                     message: "explore.search.message-\(client.server)")
-            .listRowBackground(theme.secondaryBackgroundColor)
+            .listRowBackground(Color.gray)
             .listRowSeparator(.hidden)
         } else {
           quickAccessView
@@ -91,7 +91,7 @@ public struct ExploreView: View {
       }
       .listStyle(.grouped)
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      //.background(.gray)
       .navigationTitle("explore.navigation-title")
       .searchable(text: $viewModel.searchQuery,
                   isPresented: $viewModel.isSearchPresented,
@@ -140,7 +140,7 @@ public struct ExploreView: View {
     }
     .scrollIndicators(.never)
     .listRowInsets(EdgeInsets())
-    .listRowBackground(theme.secondaryBackgroundColor)
+    //.listRowBackground(Color.gray)
     .listRowSeparator(.hidden)
   }
 
@@ -150,7 +150,7 @@ public struct ExploreView: View {
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)
         .allowsHitTesting(false)
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(Color.white)
     }
   }
 
@@ -161,7 +161,7 @@ public struct ExploreView: View {
         ForEach(results.accounts) { account in
           if let relationship = results.relationships.first(where: { $0.id == account.id }) {
             AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
-              .listRowBackground(theme.primaryBackgroundColor)
+              .listRowBackground(Color.white)
           }
         }
       }
@@ -170,7 +170,7 @@ public struct ExploreView: View {
       Section("explore.section.tags") {
         ForEach(results.hashtags) { tag in
           TagRowView(tag: tag)
-            .listRowBackground(theme.primaryBackgroundColor)
+            .listRowBackground(Color.white)
             .padding(.vertical, 4)
         }
       }
@@ -179,7 +179,7 @@ public struct ExploreView: View {
       Section("explore.section.posts") {
         ForEach(results.statuses) { status in
           StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
-            .listRowBackground(theme.primaryBackgroundColor)
+            .listRowBackground(Color.white)
             .padding(.vertical, 8)
         }
       }
@@ -193,14 +193,14 @@ public struct ExploreView: View {
       { account in
         if let relationship = viewModel.suggestedAccountsRelationShips.first(where: { $0.id == account.id }) {
           AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
-            .listRowBackground(theme.primaryBackgroundColor)
+            .listRowBackground(Color.white)
         }
       }
       NavigationLink(value: RouterDestination.accountsList(accounts: viewModel.suggestedAccounts)) {
         Text("see-more")
           .foregroundColor(theme.tintColor)
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
     }
   }
 
@@ -210,14 +210,14 @@ public struct ExploreView: View {
         .prefix(upTo: viewModel.trendingTags.count > 5 ? 5 : viewModel.trendingTags.count))
       { tag in
         TagRowView(tag: tag)
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(Color.white)
           .padding(.vertical, 4)
       }
       NavigationLink(value: RouterDestination.tagsList(tags: viewModel.trendingTags)) {
         Text("see-more")
           .foregroundColor(theme.tintColor)
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
     }
   }
 
@@ -227,7 +227,7 @@ public struct ExploreView: View {
         .prefix(upTo: viewModel.trendingStatuses.count > 3 ? 3 : viewModel.trendingStatuses.count))
       { status in
         StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(Color.white)
           .padding(.vertical, 8)
       }
 
@@ -235,7 +235,7 @@ public struct ExploreView: View {
         Text("see-more")
           .foregroundColor(theme.tintColor)
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
     }
   }
 
@@ -245,7 +245,7 @@ public struct ExploreView: View {
         .prefix(upTo: viewModel.trendingLinks.count > 3 ? 3 : viewModel.trendingLinks.count))
       { card in
         StatusRowCardView(card: card)
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(Color.white)
           .padding(.vertical, 8)
       }
 
@@ -253,7 +253,7 @@ public struct ExploreView: View {
         Text("see-more")
           .foregroundColor(theme.tintColor)
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
     }
   }
 

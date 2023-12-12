@@ -1,35 +1,28 @@
-
-
-
-
 import Foundation
-
-
 import SwiftData
 import SwiftUI
-
 
 @MainActor
 struct SettingsTabs: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.modelContext) private var context
-
+  
   @Environment(UserPreferences.self) private var preferences
   @Environment(Client.self) private var client
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(Theme.self) private var theme
-
+  
   @State private var routerPath = RouterPath()
   @State private var addAccountSheetPresented = false
   @State private var isEditingAccount = false
   @State private var cachedRemoved = false
-
+  
   @Binding var popToRootTab: Tab
-
+  
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
-
+  
   var body: some View {
     NavigationStack(path: $routerPath.path) {
       Form {
@@ -38,23 +31,15 @@ struct SettingsTabs: View {
         generalSection
         otherSections
       }
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
       .navigationTitle(Text("settings.title"))
       .navigationBarTitleDisplayMode(.inline)
-      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
       .toolbar {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-          ToolbarItem {
-            Button {
-              dismiss()
-            } label: {
-              Text("action.done").bold()
-            }
+        ToolbarItem {
+          Button {
+            dismiss()
+          } label: {
+            Text("action.done").bold()
           }
-        }
-        if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
-          SecondaryColumnToolbarItem()
         }
       }
       .withAppRouter()
@@ -71,7 +56,7 @@ struct SettingsTabs: View {
     .withSafariRouter()
     .environment(routerPath)
   }
-
+  
   private var accountsSection: some View {
     Section("settings.section.accounts") {
       ForEach(appAccountsManager.availableAccounts) { account in
@@ -103,17 +88,13 @@ struct SettingsTabs: View {
       }
       addAccountButton
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(Color.white)
   }
-
+  
   private func logoutAccount(account: AppAccount) async {
-    if let token = account.oauthToken
-    {
-      //let client = Client(server: account.server, oauthToken: token)
-      appAccountsManager.delete(account: account)
-    }
+    appAccountsManager.delete(account: account)
   }
-
+  
   @ViewBuilder
   private var generalSection: some View {
     Section("settings.section.general") {
@@ -147,9 +128,9 @@ struct SettingsTabs: View {
       }
       .tint(theme.labelColor)
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(Color.white)
   }
-
+  
   @ViewBuilder
   private var otherSections: some View {
     @Bindable var preferences = preferences
@@ -182,42 +163,14 @@ struct SettingsTabs: View {
         Label("settings.other.sound-effect", systemImage: "hifispeaker")
       }
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(Color.white)
   }
-
+  
   private var appSection: some View {
     Section {
-      if !ProcessInfo.processInfo.isiOSAppOnMac {
-        NavigationLink(destination: IconSelectorView()) {
-          Label {
-            Text("settings.app.icon")
-          } icon: {
-            let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon")
-            Image(uiImage: .init(named: icon.iconName)!)
-              .resizable()
-              .frame(width: 25, height: 25)
-              .cornerRadius(4)
-          }
-        }
-      }
-
-      Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
-        Label("settings.app.source", systemImage: "link")
-      }
-      .tint(theme.labelColor)
-
-
-      if let reviewURL = URL(string: "https://apps.apple.com/app/id\(AppInfo.appStoreAppId)?action=write-review") {
-        Link(destination: reviewURL) {
-          Label("settings.rate", systemImage: "link")
-        }
-        .tint(theme.labelColor)
-      }
-
       NavigationLink(destination: AboutView()) {
         Label("settings.app.about", systemImage: "info.circle")
       }
-
     } header: {
       Text("settings.section.app")
     } footer: {
@@ -225,9 +178,9 @@ struct SettingsTabs: View {
         Text("settings.section.app.footer \(appVersion)").frame(maxWidth: .infinity, alignment: .center)
       }
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(Color.white)
   }
-
+  
   private var addAccountButton: some View {
     Button {
       addAccountSheetPresented.toggle()
@@ -238,7 +191,7 @@ struct SettingsTabs: View {
       AddAccountView()
     }
   }
-
+  
   private var editAccountButton: some View {
     Button(role: isEditingAccount ? .none : .destructive) {
       withAnimation {
@@ -252,7 +205,7 @@ struct SettingsTabs: View {
       }
     }
   }
-
+  
   private var remoteLocalTimelinesView: some View {
     Form {
       ForEach(localTimelines) { timeline in
@@ -262,17 +215,16 @@ struct SettingsTabs: View {
           context.delete(localTimelines[index])
         }
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
       Button {
         routerPath.presentedSheet = .addRemoteLocalTimeline
       } label: {
         Label("settings.timeline.add", systemImage: "badge.plus.radiowaves.right")
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
     }
     .navigationTitle("settings.general.remote-timelines")
     .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
     .toolbar {
       EditButton()
     }

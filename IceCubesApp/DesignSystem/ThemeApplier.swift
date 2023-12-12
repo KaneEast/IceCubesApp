@@ -40,12 +40,12 @@ struct ThemeApplier: ViewModifier {
         }
         setWindowTint(theme.tintColor)
         setWindowUserInterfaceStyle(from: theme.selectedScheme)
-        setBarsColor(theme.primaryBackgroundColor)
+        setBarsColor(Color.white)
       }
       .onChange(of: theme.tintColor) { _, newValue in
         setWindowTint(newValue)
       }
-      .onChange(of: theme.primaryBackgroundColor) { _, newValue in
+      .onChange(of: Color.white) { _, newValue in
         setBarsColor(newValue)
       }
       .onChange(of: theme.selectedScheme) { _, newValue in

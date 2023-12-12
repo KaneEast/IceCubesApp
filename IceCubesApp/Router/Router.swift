@@ -8,7 +8,6 @@ import SwiftUI
 public enum RouterDestination: Hashable {
   case accountDetail(id: String)
   case accountDetailWithAccount(account: Account)
-  case accountSettingsWithAccount(account: Account, appAccount: AppAccount)
   case statusDetail(id: String)
   case statusDetailWithStatus(status: ModelsStatus)
   case remoteStatusDetail(url: URL)

@@ -93,9 +93,6 @@ extension View {
       case .addRemoteLocalTimeline:
         AddRemoteTimelineView()
           .withEnvironments()
-      case .addTagGroup:
-        EditTagGroupView()
-          .withEnvironments()
       case let .statusEditHistory(status):
         StatusEditHistoryView(statusId: status)
           .withEnvironments()
@@ -105,9 +102,6 @@ extension View {
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
       case let .shareImage(image, status):
         ActivityView(image: image, status: status)
-      case let .editTagGroup(tagGroup, onSaved):
-        EditTagGroupView(editingTagGroup: tagGroup, onSaved: onSaved)
-          .withEnvironments()
       }
     }
   }

@@ -172,12 +172,6 @@ struct TimelineTab: View {
           }
         }
       }
-
-      Button {
-        routerPath.presentedSheet = .addTagGroup
-      } label: {
-        Label("timeline.filter.add-tag-groups", systemImage: "plus")
-      }
     }
   }
 

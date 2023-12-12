@@ -197,12 +197,6 @@ public struct TimelineView: View {
             }
           }
           .scrollIndicators(.hidden)
-          Button("status.action.edit") {
-            routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: { group in
-              viewModel.timeline = .tagGroup(title: group.title, tags: group.tags)
-            })
-          }
-          .buttonStyle(.bordered)
         }
       }
     }

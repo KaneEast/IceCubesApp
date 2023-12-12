@@ -16865,6 +16865,7 @@
       }
     },
     "action.save" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -17102,6 +17103,7 @@
       }
     },
     "add-tag-groups.edit.icon.field" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -17220,6 +17222,7 @@
       }
     },
     "add-tag-groups.edit.tags" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -17338,6 +17341,7 @@
       }
     },
     "add-tag-groups.edit.tags.add" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -17457,6 +17461,7 @@
     },
     "add-tag-groups.edit.title.field" : {
       "comment" : "MARK: Tag Groups",
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -66973,6 +66978,7 @@
       }
     },
     "timeline.filter.add-tag-groups" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -67091,6 +67097,7 @@
       }
     },
     "timeline.filter.edit-tag-groups" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {

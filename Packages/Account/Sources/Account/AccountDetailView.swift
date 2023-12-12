@@ -364,12 +364,6 @@ public struct AccountDetailView: View {
             }
           }
 
-          Button {
-            routerPath.presentedSheet = .accountPushNotficationsSettings
-          } label: {
-            Label("settings.push.navigation-title", systemImage: "bell")
-          }
-
           if let account = viewModel.account {
             Divider()
 

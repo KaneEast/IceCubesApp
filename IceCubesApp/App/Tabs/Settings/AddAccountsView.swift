@@ -17,7 +17,6 @@ struct AddAccountView: View {
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(CurrentInstance.self) private var currentInstance
-  @Environment(PushNotificationsService.self) private var pushNotifications
   @Environment(Theme.self) private var theme
 
   @State private var instanceName: String = ""
@@ -252,10 +251,7 @@ struct AddAccountView: View {
       appAccountsManager.add(account: AppAccount(server: client.server,
                                                  accountName: "\(account.acct)@\(client.server)",
                                                  oauthToken: oauthToken))
-      Task {
-        pushNotifications.setAccounts(accounts: appAccountsManager.pushAccounts)
-        await pushNotifications.updateSubscriptions(forceCreate: true)
-      }
+      
       isSigninIn = false
       dismiss()
     } catch {

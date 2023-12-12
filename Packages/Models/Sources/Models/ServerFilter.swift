@@ -8,7 +8,7 @@ public struct ServerFilter: Codable, Identifiable, Hashable, Sendable {
   }
 
   public enum Context: String, Codable, CaseIterable, Sendable {
-    case home, notifications, `public`, thread, account
+    case home, `public`, thread, account
   }
 
   public enum Action: String, Codable, CaseIterable, Sendable {
@@ -41,8 +41,6 @@ public extension ServerFilter.Context {
     switch self {
     case .home:
       "rectangle.stack"
-    case .notifications:
-      "bell"
     case .public:
       "globe.americas"
     case .thread:
@@ -56,8 +54,6 @@ public extension ServerFilter.Context {
     switch self {
     case .home:
       NSLocalizedString("filter.contexts.home", comment: "")
-    case .notifications:
-      NSLocalizedString("filter.contexts.notifications", comment: "")
     case .public:
       NSLocalizedString("filter.contexts.public", comment: "")
     case .thread:

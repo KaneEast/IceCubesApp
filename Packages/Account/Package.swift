@@ -31,10 +31,6 @@ let package = Package(
       swiftSettings: [
         .enableExperimentalFeature("StrictConcurrency"),
       ]
-    ),
-    .testTarget(
-      name: "AccountTests",
-      dependencies: ["Account"]
-    ),
+    )
   ]
 )

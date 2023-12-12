@@ -34,15 +34,6 @@ struct MessagesTab: View {
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(client.id)
     }
-    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
-      if newValue == .messages {
-        if routerPath.path.isEmpty {
-          scrollToTopSignal += 1
-        } else {
-          routerPath.path = []
-        }
-      }
-    }
     .onChange(of: client.id) {
       routerPath.path = []
     }

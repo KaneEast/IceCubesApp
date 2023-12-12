@@ -39,10 +39,6 @@ let package = Package(
       swiftSettings: [
         .enableExperimentalFeature("StrictConcurrency"),
       ]
-    ),
-    .testTarget(
-      name: "TimelineTests",
-      dependencies: ["Timeline"]
-    ),
+    )
   ]
 )

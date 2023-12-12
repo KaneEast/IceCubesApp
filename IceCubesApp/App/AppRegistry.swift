@@ -103,16 +103,6 @@ extension View {
         SettingsTabs(popToRootTab: .constant(.settings))
           .withEnvironments()
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
-      case .accountPushNotficationsSettings:
-        if let subscription = PushNotificationsService.shared.subscriptions.first(where: { $0.account.token == AppAccountsManager.shared.currentAccount.oauthToken }) {
-          PushNotificationsView(subscription: subscription)
-            .withEnvironments()
-        } else {
-          EmptyView()
-        }
-      case let .report(status):
-        ReportView(status: status)
-          .withEnvironments()
       case let .shareImage(image, status):
         ActivityView(image: image, status: status)
       case let .editTagGroup(tagGroup, onSaved):
@@ -128,7 +118,6 @@ extension View {
       .environment(CurrentInstance.shared)
       .environment(Theme.shared)
       .environment(AppAccountsManager.shared)
-      .environment(PushNotificationsService.shared)
       .environment(AppAccountsManager.shared.currentClient)
   }
 

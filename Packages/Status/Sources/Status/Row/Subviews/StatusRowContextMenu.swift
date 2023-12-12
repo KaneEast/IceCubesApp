@@ -237,13 +237,6 @@ struct StatusRowContextMenu: View {
           }
         }
       }
-      Section {
-        Button(role: .destructive) {
-          viewModel.routerPath.presentedSheet = .report(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
-        } label: {
-          Label("status.action.report", systemImage: "exclamationmark.bubble")
-        }
-      }
     }
   }
 }

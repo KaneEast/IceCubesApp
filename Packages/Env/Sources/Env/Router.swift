@@ -38,15 +38,13 @@ public enum SheetDestination: Identifiable {
   case addTagGroup
   case statusEditHistory(status: String)
   case settings
-  case accountPushNotficationsSettings
-  case report(status: Status)
   case shareImage(image: UIImage, status: Status)
   case editTagGroup(tagGroup: TagGroup, onSaved: ((TagGroup) -> Void)?)
 
   public var id: String {
     switch self {
     case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor,
-         .mentionStatusEditor, .settings, .accountPushNotficationsSettings:
+         .mentionStatusEditor, .settings:
       "statusEditor"
     case .listEdit:
       "listEdit"
@@ -59,9 +57,7 @@ public enum SheetDestination: Identifiable {
     case .addRemoteLocalTimeline:
       "addRemoteLocalTimeline"
     case .statusEditHistory:
-      "statusEditHistory"
-    case .report:
-      "report"
+      "statusEditHistory"    
     case .shareImage:
       "shareImage"
     case .editTagGroup:

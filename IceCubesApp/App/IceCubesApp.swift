@@ -5,7 +5,6 @@ import DesignSystem
 import Env
 import KeychainSwift
 import Network
-import RevenueCat
 import Status
 import SwiftUI
 import Timeline
@@ -14,36 +13,33 @@ import MediaUI
 @main
 struct IceCubesApp: App {
   @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
-
+  
   @Environment(\.scenePhase) private var scenePhase
-
+  
   @State private var appAccountsManager = AppAccountsManager.shared
   @State private var currentInstance = CurrentInstance.shared
   @State private var currentAccount = CurrentAccount.shared
   @State private var userPreferences = UserPreferences.shared
-  @State private var pushNotificationsService = PushNotificationsService.shared
   @State private var watcher = StreamWatcher()
   @State private var quickLook = QuickLook()
   @State private var theme = Theme.shared
   @State private var sidebarRouterPath = RouterPath()
-
+  
   @State private var selectedTab: Tab = .timeline
   @State private var popToRootTab: Tab = .other
   @State private var sideBarLoadedTabs: Set<Tab> = Set()
   @State private var isSupporter: Bool = false
-
+  
   private var availableTabs: [Tab] {
     appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
   }
-
+  
   var body: some Scene {
     WindowGroup {
       appView
         .applyTheme(theme)
         .onAppear {
           setNewClientsInEnv(client: appAccountsManager.currentClient)
-          setupRevenueCat()
-          refreshPushSubs()
         }
         .environment(appAccountsManager)
         .environment(appAccountsManager.currentClient)
@@ -53,7 +49,6 @@ struct IceCubesApp: App {
         .environment(userPreferences)
         .environment(theme)
         .environment(watcher)
-        .environment(pushNotificationsService)
         .environment(\.isSupporter, isSupporter)
         .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
           MediaUIView(selectedAttachment: selectedMediaAttachment,
@@ -68,23 +63,6 @@ struct IceCubesApp: App {
             .edgesIgnoringSafeArea(.bottom)
             .background(TransparentBackground())
         })
-        .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
-          if newValue != nil {
-            pushNotificationsService.handledNotification = nil
-            if appAccountsManager.currentAccount.oauthToken?.accessToken != newValue?.account.token.accessToken,
-               let account = appAccountsManager.availableAccounts.first(where:
-                 { $0.oauthToken?.accessToken == newValue?.account.token.accessToken })
-            {
-              appAccountsManager.currentAccount = account
-              DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                selectedTab = .notifications
-                pushNotificationsService.handledNotification = newValue
-              }
-            } else {
-              selectedTab = .notifications
-            }
-          }
-        }
         .withModelContainer()
     }
     .commands {
@@ -100,7 +78,7 @@ struct IceCubesApp: App {
       }
     }
   }
-
+  
   @ViewBuilder
   private var appView: some View {
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
@@ -109,16 +87,7 @@ struct IceCubesApp: App {
       tabBarView
     }
   }
-
-  private func badgeFor(tab: Tab) -> Int {
-    if tab == .notifications, selectedTab != tab,
-       let token = appAccountsManager.currentAccount.oauthToken
-    {
-      return watcher.unreadNotificationsCount + (userPreferences.notificationsCount[token] ?? 0)
-    }
-    return 0
-  }
-
+  
   private var sidebarView: some View {
     SideBarView(selectedTab: $selectedTab,
                 popToRootTab: $popToRootTab,
@@ -148,7 +117,6 @@ struct IceCubesApp: App {
            userPreferences.showiPadSecondaryColumn
         {
           Divider().edgesIgnoringSafeArea(.all)
-          notificationsSecondaryColumn
         }
       }
     }.onChange(of: $appAccountsManager.currentAccount.id) {
@@ -156,41 +124,10 @@ struct IceCubesApp: App {
     }
     .environment(sidebarRouterPath)
   }
-
-  private var notificationsSecondaryColumn: some View {
-    NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
-      .environment(\.isSecondaryColumn, true)
-      .frame(maxWidth: .secondaryColumnWidth)
-      .id(appAccountsManager.currentAccount.id)
-  }
-
+  
+  
   private var tabBarView: some View {
-    TabView(selection: .init(get: {
-      selectedTab
-    }, set: { newTab in
-      if newTab == selectedTab {
-        /// Stupid hack to trigger onChange binding in tab views.
-        popToRootTab = .other
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-          popToRootTab = selectedTab
-        }
-      }
-
-      HapticManager.shared.fireHaptic(of: .tabSelection)
-      SoundEffectManager.shared.playSound(of: .tabSelection)
-
-      selectedTab = newTab
-
-      DispatchQueue.main.async {
-        if selectedTab == .notifications,
-           let token = appAccountsManager.currentAccount.oauthToken
-        {
-          userPreferences.notificationsCount[token] = 0
-          watcher.unreadNotificationsCount = 0
-        }
-      }
-
-    })) {
+    TabView {
       ForEach(availableTabs) { tab in
         tab.makeContentView(popToRootTab: $popToRootTab)
           .tabItem {
@@ -201,13 +138,12 @@ struct IceCubesApp: App {
             }
           }
           .tag(tab)
-          .badge(badgeFor(tab: tab))
           .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
       }
     }
     .id(appAccountsManager.currentClient.id)
   }
-
+  
   private func setNewClientsInEnv(client: Client) {
     currentAccount.setClient(client: client)
     currentInstance.setClient(client: client)
@@ -218,7 +154,7 @@ struct IceCubesApp: App {
       watcher.watch(streams: [.user, .direct])
     }
   }
-
+  
   private func handleScenePhase(scenePhase: ScenePhase) {
     switch scenePhase {
     case .background:
@@ -234,21 +170,7 @@ struct IceCubesApp: App {
       break
     }
   }
-
-  private func setupRevenueCat() {
-    Purchases.logLevel = .error
-    Purchases.configure(withAPIKey: "appl_JXmiRckOzXXTsHKitQiicXCvMQi")
-    Purchases.shared.getCustomerInfo { info, _ in
-      if info?.entitlements["Supporter"]?.isActive == true {
-        isSupporter = true
-      }
-    }
-  }
-
-  private func refreshPushSubs() {
-    PushNotificationsService.shared.requestPushNotifications()
-  }
-
+  
   @CommandsBuilder
   private var appMenu: some Commands {
     CommandGroup(replacing: .newItem) {
@@ -278,27 +200,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                    didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
   {
     try? AVAudioSession.sharedInstance().setCategory(.ambient)
-    PushNotificationsService.shared.setAccounts(accounts: AppAccountsManager.shared.pushAccounts)
     return true
   }
-
-  func application(_: UIApplication,
-                   didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
-  {
-    PushNotificationsService.shared.pushToken = deviceToken
-    Task {
-      PushNotificationsService.shared.setAccounts(accounts: AppAccountsManager.shared.pushAccounts)
-      await PushNotificationsService.shared.updateSubscriptions(forceCreate: false)
-    }
-  }
-
-  func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError _: Error) {}
-
-  func application(_: UIApplication, didReceiveRemoteNotification _: [AnyHashable: Any]) async -> UIBackgroundFetchResult {
-    UserPreferences.shared.reloadNotificationsCount(tokens: AppAccountsManager.shared.availableAccounts.compactMap(\.oauthToken))
-    return .noData
-  }
-
+  
   func application(_: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options _: UIScene.ConnectionOptions) -> UISceneConfiguration {
     let configuration = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
     if connectingSceneSession.role == .windowApplication {

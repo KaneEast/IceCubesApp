@@ -151,13 +151,6 @@ struct ConversationMessageView: View {
           Label("status.action.mention", systemImage: "at")
         }
       }
-      Section {
-        Button(role: .destructive) {
-          routerPath.presentedSheet = .report(status: message.reblogAsAsStatus ?? message)
-        } label: {
-          Label("status.action.report", systemImage: "exclamationmark.bubble")
-        }
-      }
     }
   }
 

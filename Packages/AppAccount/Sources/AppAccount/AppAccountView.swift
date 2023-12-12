@@ -66,20 +66,6 @@ public struct AppAccountView: View {
               Image(systemName: "checkmark.circle.fill")
                 .foregroundStyle(.white, .green)
                 .offset(x: 5, y: -5)
-            } else if viewModel.showBadge,
-                      let token = viewModel.appAccount.oauthToken,
-                      let notificationsCount = preferences.notificationsCount[token],
-                      notificationsCount > 0
-            {
-              ZStack {
-                Circle()
-                  .fill(.red)
-                Text(notificationsCount > 99 ? "99+" : String(notificationsCount))
-                  .foregroundColor(.white)
-                  .font(.system(size: 9))
-              }
-              .frame(width: 20, height: 20)
-              .offset(x: 5, y: -5)
             }
           }
         } else {

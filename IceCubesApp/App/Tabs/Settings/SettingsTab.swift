@@ -15,7 +15,6 @@ struct SettingsTabs: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.modelContext) private var context
 
-  @Environment(PushNotificationsService.self) private var pushNotifications
   @Environment(UserPreferences.self) private var preferences
   @Environment(Client.self) private var client
   @Environment(CurrentInstance.self) private var currentInstance
@@ -74,11 +73,6 @@ struct SettingsTabs: View {
     }
     .withSafariRouter()
     .environment(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
-      if newValue == .notifications {
-        routerPath.path = []
-      }
-    }
   }
 
   private var accountsSection: some View {
@@ -116,12 +110,10 @@ struct SettingsTabs: View {
   }
 
   private func logoutAccount(account: AppAccount) async {
-    if let token = account.oauthToken,
-       let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
+    if let token = account.oauthToken
     {
       let client = Client(server: account.server, oauthToken: token)
       await timelineCache.clearCache(for: client.id)
-      await sub.deleteSubscription()
       appAccountsManager.delete(account: account)
     }
   }
@@ -222,9 +214,6 @@ struct SettingsTabs: View {
       .accessibilityRemoveTraits(.isButton)
       .tint(theme.labelColor)
 
-      NavigationLink(destination: SupportAppView()) {
-        Label("settings.app.support", systemImage: "wand.and.stars")
-      }
 
       if let reviewURL = URL(string: "https://apps.apple.com/app/id\(AppInfo.appStoreAppId)?action=write-review") {
         Link(destination: reviewURL) {

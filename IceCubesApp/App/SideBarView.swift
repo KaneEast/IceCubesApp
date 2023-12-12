@@ -19,23 +19,10 @@ struct SideBarView<Content: View>: View {
   var tabs: [Tab]
   @ViewBuilder var content: () -> Content
 
-  private func badgeFor(tab: Tab) -> Int {
-    if tab == .notifications, selectedTab != tab,
-       let token = appAccounts.currentAccount.oauthToken
-    {
-      return watcher.unreadNotificationsCount + (userPreferences.notificationsCount[token] ?? 0)
-    }
-    return 0
-  }
-
   private func makeIconForTab(tab: Tab) -> some View {
     ZStack(alignment: .topTrailing) {
       SideBarIcon(systemIconName: tab.iconName,
                   isSelected: tab == selectedTab)
-      let badge = badgeFor(tab: tab)
-      if badge > 0 {
-        makeBadgeView(count: badge)
-      }
     }
     .contentShape(Rectangle())
     .frame(width: .sidebarWidth, height: 50)
@@ -81,13 +68,6 @@ struct SideBarView<Content: View>: View {
     } label: {
       ZStack(alignment: .topTrailing) {
         AppAccountView(viewModel: .init(appAccount: account, isCompact: true))
-        if showBadge,
-           let token = account.oauthToken,
-           let notificationsCount = userPreferences.notificationsCount[token],
-           notificationsCount > 0
-        {
-          makeBadgeView(count: notificationsCount)
-        }
       }
     }
     .frame(width: .sidebarWidth, height: 50)
@@ -110,14 +90,7 @@ struct SideBarView<Content: View>: View {
         }
         selectedTab = tab
         SoundEffectManager.shared.playSound(of: .tabSelection)
-        if tab == .notifications {
-          if let token = appAccounts.currentAccount.oauthToken {
-            userPreferences.notificationsCount[token] = 0
-          }
-          watcher.unreadNotificationsCount = 0
-        }
       } label: {
-        makeIconForTab(tab: tab)
       }
       .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
     }

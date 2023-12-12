@@ -17571,6 +17571,7 @@
       }
     },
     "alert.button.ok" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -17689,6 +17690,7 @@
       }
     },
     "alert.error" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -34525,6 +34527,7 @@
       }
     },
     "report.action.send" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -34644,6 +34647,7 @@
     },
     "report.comment.placeholder" : {
       "comment" : "MARK: Report",
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -34762,6 +34766,7 @@
       }
     },
     "report.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -36300,6 +36305,7 @@
       }
     },
     "settings.app.support" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -43032,6 +43038,7 @@
       }
     },
     "settings.general.push-notifications" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -44448,6 +44455,7 @@
       }
     },
     "settings.push.boosts" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -44566,6 +44574,7 @@
       }
     },
     "settings.push.duplicate.button.fix" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -44684,6 +44693,7 @@
       }
     },
     "settings.push.duplicate.footer" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -44802,6 +44812,7 @@
       }
     },
     "settings.push.duplicate.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -44920,6 +44931,7 @@
       }
     },
     "settings.push.favorites" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -45038,6 +45050,7 @@
       }
     },
     "settings.push.follows" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -45156,6 +45169,7 @@
       }
     },
     "settings.push.main-toggle" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -45274,6 +45288,7 @@
       }
     },
     "settings.push.main-toggle.description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -45392,6 +45407,7 @@
       }
     },
     "settings.push.mentions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -45510,6 +45526,7 @@
       }
     },
     "settings.push.navigation-title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -45628,6 +45645,7 @@
       }
     },
     "settings.push.new-posts" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -45746,6 +45764,7 @@
       }
     },
     "settings.push.polls" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -46690,6 +46709,7 @@
       }
     },
     "settings.support.alert.error.message" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -46808,6 +46828,7 @@
       }
     },
     "settings.support.alert.message" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -46926,6 +46947,7 @@
       }
     },
     "settings.support.alert.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -47044,6 +47066,7 @@
       }
     },
     "settings.support.four.subtitle" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -47162,6 +47185,7 @@
       }
     },
     "settings.support.four.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -47280,6 +47304,7 @@
       }
     },
     "settings.support.message-from-dev" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -47398,6 +47423,7 @@
       }
     },
     "settings.support.navigation-title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -47516,6 +47542,7 @@
       }
     },
     "settings.support.one.subtitle" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -47634,6 +47661,7 @@
       }
     },
     "settings.support.one.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -47752,6 +47780,7 @@
       }
     },
     "settings.support.placeholder.loading-subtitle" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -47988,6 +48017,7 @@
       }
     },
     "settings.support.restore-purchase.button" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -48106,6 +48136,7 @@
       }
     },
     "settings.support.restore-purchase.explanation" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -48224,6 +48255,7 @@
       }
     },
     "settings.support.supporter.subscribed" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -48342,6 +48374,7 @@
       }
     },
     "settings.support.supporter.subscription-info" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -48460,6 +48493,7 @@
       }
     },
     "settings.support.supporter.subtitle" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -48578,6 +48612,7 @@
       }
     },
     "settings.support.supporter.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -48814,6 +48849,7 @@
       }
     },
     "settings.support.three.subtitle" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -48932,6 +48968,7 @@
       }
     },
     "settings.support.three.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -49050,6 +49087,7 @@
       }
     },
     "settings.support.two.subtitle" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -49168,6 +49206,7 @@
       }
     },
     "settings.support.two.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -64651,6 +64690,7 @@
       }
     },
     "tab.federated" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -64769,6 +64809,7 @@
       }
     },
     "tab.local" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -64887,6 +64928,7 @@
       }
     },
     "tab.messages" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -65005,6 +65047,7 @@
       }
     },
     "tab.notifications" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -65477,6 +65520,7 @@
       }
     },
     "tab.trending" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {

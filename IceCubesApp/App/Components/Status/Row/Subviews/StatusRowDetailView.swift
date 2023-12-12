@@ -21,8 +21,7 @@ struct StatusRowDetailView: View {
             Text(viewModel.status.createdAt.asDate, style: .time) +
             Text("  ·")
           Image(systemName: viewModel.status.visibility.iconName)
-            .accessibilityHidden(true)
-        }.accessibilityElement(children: .combine)
+        }
         Spacer()
         if let name = viewModel.status.application?.name, let url = viewModel.status.application?.website {
           Button {
@@ -32,10 +31,6 @@ struct StatusRowDetailView: View {
               .underline()
           }
           .buttonStyle(.plain)
-          .accessibilityLabel("accessibility.status.application.label")
-          .accessibilityValue(name)
-          .accessibilityAddTraits(.isLink)
-          .accessibilityRemoveTraits(.isButton)
         }
       }
       .font(.scaledCaption)

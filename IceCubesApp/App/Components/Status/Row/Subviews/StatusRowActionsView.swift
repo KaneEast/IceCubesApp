@@ -55,34 +55,7 @@ struct StatusRowActionsView: View {
       }
     }
 
-    func accessibilityLabel(dataController: StatusDataController, privateBoost: Bool = false) -> LocalizedStringKey {
-      switch self {
-      case .respond:
-        return "status.action.reply"
-      case .boost:
-        if dataController.isReblogged {
-          return "status.action.unboost"
-        }
-        return privateBoost
-          ? "status.action.boost-to-followers"
-          : "status.action.boost"
-      case .favorite:
-        return dataController.isFavorited
-          ? "status.action.unfavorite"
-          : "status.action.favorite"
-      case .bookmark:
-        return dataController.isBookmarked
-          ? "status.action.unbookmark"
-          : "status.action.bookmark"
-      case .share:
-        return "status.action.share"
-      }
-    }
-
-    func count(dataController: StatusDataController, isFocused: Bool, theme: Theme) -> Int? {
-      if theme.statusActionsDisplay == .discret, isFocused {
-        return nil
-      }
+    func count(dataController: StatusDataController, isFocused: Bool, theme: Theme) -> Int? {      
       switch self {
       case .respond:
         return dataController.repliesCount
@@ -132,8 +105,6 @@ struct StatusRowActionsView: View {
                   action.image(dataController: statusDataController)
                 }
                 .buttonStyle(.statusAction())
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel("status.action.share-link")
               case .linkAndText:
                 ShareLink(item: url,
                           subject: Text(viewModel.finalStatus.account.safeDisplayName),
@@ -142,8 +113,6 @@ struct StatusRowActionsView: View {
                   action.image(dataController: statusDataController)
                 }
                 .buttonStyle(.statusAction())
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel("status.action.share-link")
               }
             }
           } else {
@@ -189,8 +158,6 @@ struct StatusRowActionsView: View {
           .monospacedDigit()
       }
     }
-    .accessibilityElement(children: .combine)
-    .accessibilityLabel(action.accessibilityLabel(dataController: statusDataController, privateBoost: privateBoost()))
   }
 
   private func handleAction(action: Action) {

@@ -44,7 +44,7 @@ public struct StatusEditHistoryView: View {
               Spacer()
             }
           }
-        }.listRowBackground(theme.primaryBackgroundColor)
+        }.listRowBackground(Color.white)
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -62,7 +62,7 @@ public struct StatusEditHistoryView: View {
       }
       .listStyle(.plain)
       .scrollContentBackground(.hidden)
-      .background(theme.primaryBackgroundColor)
+      .background(Color.white)
     }
   }
 }

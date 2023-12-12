@@ -97,9 +97,9 @@ import SwiftUI
     if status.visibility == .direct {
       theme.tintColor.opacity(0.15)
     } else if userMentionned {
-      theme.secondaryBackgroundColor
+      .gray
     } else {
-      theme.primaryBackgroundColor
+      Color.white
     }
   }
 

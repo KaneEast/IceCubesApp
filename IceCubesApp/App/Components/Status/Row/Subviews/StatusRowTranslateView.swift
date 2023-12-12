@@ -37,7 +37,7 @@ struct StatusRowTranslateView: View {
 
   var body: some View {
     if !isInCaptureMode,
-       !isCompact,
+        !isCompact,
        let userLang = preferences.serverPreferences?.postLanguage,
        shouldShowTranslateButton
     {

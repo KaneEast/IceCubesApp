@@ -47,8 +47,6 @@ struct StatusRowTextView: View {
           Image(systemName: "chevron.down")
         }
         .buttonStyle(.bordered)
-        .accessibility(label: Text("status.show-full-post"))
-        .accessibilityHidden(true)
       }
       .contentShape(Rectangle())
       .onTapGesture { // make whole row tapable to make up for smaller button size

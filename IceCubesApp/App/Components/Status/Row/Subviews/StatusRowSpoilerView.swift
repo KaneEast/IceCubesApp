@@ -27,8 +27,6 @@ struct StatusRowSpoilerView: View {
           .rotationEffect(Angle(degrees: displaySpoiler ? 0 : 180))
       }
       .buttonStyle(.bordered)
-      .accessibility(label: displaySpoiler ? Text("status.show-more") : Text("status.show-less"))
-      .accessibilityHidden(true)
     }
     .contentShape(Rectangle())
     .onTapGesture { // make whole row tapable to make up for smaller button size

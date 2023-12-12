@@ -65,8 +65,6 @@ public struct StatusRowCardView: View {
                 }
               }
               .processors(processors)
-              // This image is decorative
-              .accessibilityHidden(true)
             }
             .frame(height: imageHeight)
           }
@@ -91,7 +89,7 @@ public struct StatusRowCardView: View {
         }
         .frame(maxWidth: maxWidth)
         .fixedSize(horizontal: false, vertical: true)
-        .background(theme.secondaryBackgroundColor)
+        .background(.gray)
         .cornerRadius(16)
         .overlay(
           RoundedRectangle(cornerRadius: 16)
@@ -111,9 +109,6 @@ public struct StatusRowCardView: View {
             Label("status.card.copy", systemImage: "doc.on.doc")
           }
         }
-        .accessibilityElement(children: .combine)
-        .accessibilityAddTraits(.isLink)
-        .accessibilityRemoveTraits(.isStaticText)
       }
     }
     .buttonStyle(.plain)

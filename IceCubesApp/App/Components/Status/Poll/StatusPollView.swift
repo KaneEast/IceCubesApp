@@ -91,12 +91,6 @@ public struct StatusPollView: View {
             }
           }
         }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(combinedAccessibilityLabel(for: option, index: index))
-        .accessibilityRespondsToUserInteraction(isInteractive)
-        .accessibilityAddTraits(isSelected(option: option) ? .isSelected : [])
-        .accessibilityAddTraits(isInteractive ? [] : .isStaticText)
-        .accessibilityRemoveTraits(isInteractive ? [] : .isButton)
       }
       if !viewModel.poll.expired, !(viewModel.poll.voted ?? false), !viewModel.votes.isEmpty {
         Button("status.poll.send") {
@@ -117,16 +111,6 @@ public struct StatusPollView: View {
         await viewModel.fetchPoll()
       }
     }
-    .accessibilityElement(children: .contain)
-    .accessibilityLabel(viewModel.poll.expired ? "accessibility.status.poll.finished.label" : "accessibility.status.poll.active.label")
-  }
-
-  func combinedAccessibilityLabel(for option: Poll.Option, index: Int) -> Text {
-    let showPercentage = viewModel.poll.expired || viewModel.poll.voted ?? false
-    return Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(viewModel.poll.options.count)") +
-      Text(", ") +
-      Text(option.title) +
-      Text(showPercentage ? ", \(percentForOption(option: option))%" : "")
   }
 
   private var footerView: some View {
@@ -137,7 +121,6 @@ public struct StatusPollView: View {
         Text("status.poll.n-votes \(viewModel.poll.votesCount)")
       }
       Text(" ⸱ ")
-        .accessibilityHidden(true)
       if viewModel.poll.expired {
         Text("status.poll.closed")
       } else if let date = viewModel.poll.expiresAt.value?.asDate {
@@ -146,8 +129,6 @@ public struct StatusPollView: View {
     }
     .font(.scaledFootnote)
     .foregroundColor(.gray)
-    .accessibilityElement(children: .combine)
-    .accessibilityAddTraits(.updatesFrequently)
   }
 
   @ViewBuilder

@@ -25,7 +25,6 @@ struct SettingsTabs: View {
   @State private var addAccountSheetPresented = false
   @State private var isEditingAccount = false
   @State private var cachedRemoved = false
-  @State private var timelineCache = TimelineCache()
 
   @Binding var popToRootTab: Tab
 
@@ -112,8 +111,7 @@ struct SettingsTabs: View {
   private func logoutAccount(account: AppAccount) async {
     if let token = account.oauthToken
     {
-      let client = Client(server: account.server, oauthToken: token)
-      await timelineCache.clearCache(for: client.id)
+      //let client = Client(server: account.server, oauthToken: token)
       appAccountsManager.delete(account: account)
     }
   }

@@ -35240,6 +35240,7 @@
       }
     },
     "settings.account.action.delete-cache" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -35477,6 +35478,7 @@
       }
     },
     "settings.account.cached-posts-%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {

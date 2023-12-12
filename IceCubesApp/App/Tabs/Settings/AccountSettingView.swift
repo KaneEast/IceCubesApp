@@ -20,7 +20,6 @@ struct AccountSettingsView: View {
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false
   @State private var cachedPostsCount: Int = 0
-  @State private var timelineCache = TimelineCache()
 
   let account: Account
   let appAccount: AppAccount
@@ -51,17 +50,6 @@ struct AccountSettingsView: View {
       .listRowBackground(theme.primaryBackgroundColor)
 
       Section {
-        Label("settings.account.cached-posts-\(String(cachedPostsCount))", systemImage: "internaldrive")
-        Button("settings.account.action.delete-cache", role: .destructive) {
-          Task {
-            await timelineCache.clearCache(for: appAccountsManager.currentClient.id)
-            cachedPostsCount = await timelineCache.cachedPostsCount(for: appAccountsManager.currentClient.id)
-          }
-        }
-      }
-      .listRowBackground(theme.primaryBackgroundColor)
-
-      Section {
         Button {
           openURL(URL(string: "https://\(client.server)/settings/profile")!)
         } label: {
@@ -72,10 +60,9 @@ struct AccountSettingsView: View {
 
       Section {
         Button(role: .destructive) {
-          if let token = appAccount.oauthToken {
+          if appAccount.oauthToken != nil {
             Task {
-              let client = Client(server: appAccount.server, oauthToken: token)
-              await timelineCache.clearCache(for: client.id)
+              //let client = Client(server: appAccount.server, oauthToken: token)
               appAccountsManager.delete(account: appAccount)
               dismiss()
             }
@@ -101,9 +88,6 @@ struct AccountSettingsView: View {
             .font(.headline)
         }
       }
-    }
-    .task {
-      cachedPostsCount = await timelineCache.cachedPostsCount(for: appAccountsManager.currentClient.id)
     }
     .navigationTitle(account.safeDisplayName)
     .scrollContentBackground(.hidden)

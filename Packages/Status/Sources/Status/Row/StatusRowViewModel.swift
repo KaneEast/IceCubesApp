@@ -152,7 +152,6 @@ import SwiftUI
     if UserPreferences.shared.suppressDupeReblogs, !seen {
       DispatchQueue.global().async { [weak self] in
         guard let self else { return }
-        ReblogCache.shared.cache(status, seen: true)
         Task { @MainActor in
           self.seen = true
         }

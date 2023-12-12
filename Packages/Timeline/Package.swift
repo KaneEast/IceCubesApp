@@ -22,7 +22,6 @@ let package = Package(
     .package(name: "Status", path: "../Status"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
     .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", from: "1.0.0"),
-    .package(url: "https://github.com/mergesort/Bodega", from: "2.0.2"),
   ],
   targets: [
     .target(
@@ -34,7 +33,6 @@ let package = Package(
         .product(name: "Status", package: "Status"),
         .product(name: "DesignSystem", package: "DesignSystem"),
         .product(name: "SwiftUIIntrospect", package: "SwiftUI-Introspect"),
-        .product(name: "Bodega", package: "Bodega"),
       ],
       swiftSettings: [
         .enableExperimentalFeature("StrictConcurrency"),

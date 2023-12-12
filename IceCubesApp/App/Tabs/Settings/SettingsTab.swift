@@ -1,5 +1,5 @@
-import Account
-import AppAccount
+
+
 import DesignSystem
 import Env
 import Foundation
@@ -7,7 +7,7 @@ import Models
 import Network
 import SwiftData
 import SwiftUI
-import Timeline
+
 
 @MainActor
 struct SettingsTabs: View {

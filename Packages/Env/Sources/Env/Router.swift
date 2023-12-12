@@ -37,7 +37,6 @@ public enum SheetDestination: Identifiable {
   case addRemoteLocalTimeline
   case statusEditHistory(status: String)
   case settings
-  case shareImage(image: UIImage, status: Status)
 
   public var id: String {
     switch self {
@@ -53,9 +52,7 @@ public enum SheetDestination: Identifiable {
     case .addRemoteLocalTimeline:
       "addRemoteLocalTimeline"
     case .statusEditHistory:
-      "statusEditHistory"    
-    case .shareImage:
-      "shareImage"
+      "statusEditHistory"
     }
   }
 }

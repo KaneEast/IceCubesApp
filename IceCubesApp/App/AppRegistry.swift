@@ -1,15 +1,14 @@
-import Account
-import AppAccount
+
+
 import Conversations
 import DesignSystem
 import Env
-import Explore
+
 import LinkPresentation
 import Lists
 import Models
-import Status
+
 import SwiftUI
-import Timeline
 
 @MainActor
 extension View {
@@ -100,8 +99,6 @@ extension View {
         SettingsTabs(popToRootTab: .constant(.settings))
           .withEnvironments()
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
-      case let .shareImage(image, status):
-        ActivityView(image: image, status: status)
       }
     }
   }
@@ -124,42 +121,43 @@ extension View {
   }
 }
 
-struct ActivityView: UIViewControllerRepresentable {
-  let image: UIImage
-  let status: Status
-
-  class LinkDelegate: NSObject, UIActivityItemSource {
-    let image: UIImage
-    let status: Status
-
-    init(image: UIImage, status: Status) {
-      self.image = image
-      self.status = status
-    }
-
-    func activityViewControllerLinkMetadata(_: UIActivityViewController) -> LPLinkMetadata? {
-      let imageProvider = NSItemProvider(object: image)
-      let metadata = LPLinkMetadata()
-      metadata.imageProvider = imageProvider
-      metadata.title = status.reblog?.content.asRawText ?? status.content.asRawText
-      return metadata
-    }
-
-    func activityViewControllerPlaceholderItem(_: UIActivityViewController) -> Any {
-      image
-    }
-
-    func activityViewController(_: UIActivityViewController,
-                                itemForActivityType _: UIActivity.ActivityType?) -> Any?
-    {
-      nil
-    }
-  }
-
-  func makeUIViewController(context _: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
-    UIActivityViewController(activityItems: [image, LinkDelegate(image: image, status: status)],
-                             applicationActivities: nil)
-  }
-
-  func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}
-}
+//struct ARActivityView: UIViewControllerRepresentable {
+//  
+//  let image: UIImage
+//  let status: Status
+//
+//  class LinkDelegate: NSObject, UIActivityItemSource {
+//    let image: UIImage
+//    let status: Status
+//
+//    init(image: UIImage, status: Status) {
+//      self.image = image
+//      self.status = status
+//    }
+//
+//    func activityViewControllerLinkMetadata(_: UIActivityViewController) -> LPLinkMetadata? {
+//      let imageProvider = NSItemProvider(object: image)
+//      let metadata = LPLinkMetadata()
+//      metadata.imageProvider = imageProvider
+//      metadata.title = status.reblog?.content.asRawText ?? status.content.asRawText
+//      return metadata
+//    }
+//
+//    func activityViewControllerPlaceholderItem(_: UIActivityViewController) -> Any {
+//      image
+//    }
+//
+//    func activityViewController(_: UIActivityViewController,
+//                                itemForActivityType _: UIActivity.ActivityType?) -> Any?
+//    {
+//      nil
+//    }
+//  }
+//
+//  func makeUIViewController(context _: UIViewControllerRepresentableContext<ARActivityView>) -> UIActivityViewController {
+//    UIActivityViewController(activityItems: [image, LinkDelegate(image: image, status: status)],
+//                             applicationActivities: nil)
+//  }
+//
+//  func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}
+//}

@@ -72,7 +72,7 @@ struct EditFilterView: View {
     .navigationBarTitleDisplayMode(.inline)
     .scrollContentBackground(.hidden)
     .scrollDismissesKeyboard(.interactively)
-    .background(theme.secondaryBackgroundColor)
+    .background(.gray)
     .onAppear {
       if filter == nil {
         focusedField = .title
@@ -104,7 +104,7 @@ struct EditFilterView: View {
           .disabled(expirySelection != .custom)
       }
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(Color.white)
   }
 
   @ViewBuilder
@@ -118,7 +118,7 @@ struct EditFilterView: View {
           }
         }
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(Color.white)
 
     if filter == nil, !title.isEmpty {
       Section {
@@ -138,7 +138,7 @@ struct EditFilterView: View {
         .buttonStyle(.borderedProminent)
         .transition(.opacity)
       }
-      .listRowBackground(theme.secondaryBackgroundColor)
+      .listRowBackground(Color.gray)
     }
   }
 
@@ -192,7 +192,7 @@ struct EditFilterView: View {
         }
       }
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(Color.white)
   }
 
   private var contextsSection: some View {
@@ -214,7 +214,7 @@ struct EditFilterView: View {
         }
         .disabled(isSavingFilter)
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(Color.white)
     }
   }
 
@@ -235,7 +235,7 @@ struct EditFilterView: View {
       }
       .pickerStyle(.inline)
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(Color.white)
   }
 
   private var saveButton: some View {

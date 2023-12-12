@@ -53,11 +53,6 @@ public struct AppAccountsSelectorView: View {
     .onAppear {
       refreshAccounts()
     }
-    .accessibilityRepresentation {
-      Menu("accessibility.app-account.selector.accounts") {}
-        .accessibilityHint("accessibility.app-account.selector.accounts.hint")
-        .accessibilityRemoveTraits(.isButton)
-    }
   }
 
   @ViewBuilder

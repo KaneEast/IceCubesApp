@@ -98,8 +98,6 @@ public struct FollowButton: View {
           Text("account.follow.requested")
         } else {
           Text(viewModel.relationship.following ? "account.follow.following" : "account.follow.follow")
-            .accessibilityLabel("account.follow.following")
-            .accessibilityValue(viewModel.relationship.following ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
         }
       }
       if viewModel.relationship.following,
@@ -113,8 +111,6 @@ public struct FollowButton: View {
           } label: {
             Image(systemName: viewModel.relationship.notifying ? "bell.fill" : "bell")
           }
-          .accessibilityLabel("accessibility.tabs.profile.user-notifications.label")
-          .accessibilityValue(viewModel.relationship.notifying ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
           Button {
             Task {
               await viewModel.toggleReboosts()
@@ -122,8 +118,6 @@ public struct FollowButton: View {
           } label: {
             Image(viewModel.relationship.showingReblogs ? "Rocket.Fill" : "Rocket")
           }
-          .accessibilityLabel("accessibility.tabs.profile.user-reblogs.label")
-          .accessibilityValue(viewModel.relationship.showingReblogs ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
         }
       }
     }

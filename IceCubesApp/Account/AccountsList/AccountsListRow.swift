@@ -118,7 +118,7 @@ public struct AccountsListRow: View {
       }
       .listStyle(.plain)
       .scrollContentBackground(.hidden)
-      .background(theme.primaryBackgroundColor)
+      .background(Color.white)
       .environment(theme)
       .environment(currentAccount)
       .environment(client)

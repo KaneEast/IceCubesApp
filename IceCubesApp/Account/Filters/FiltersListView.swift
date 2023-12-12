@@ -54,7 +54,7 @@ public struct FiltersListView: View {
               }
             }
           }
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(Color.white)
         }
 
         Section {
@@ -62,7 +62,7 @@ public struct FiltersListView: View {
             Label("filter.new", systemImage: "plus")
           }
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(Color.white)
       }
       .toolbar {
         toolbarContent
@@ -70,7 +70,7 @@ public struct FiltersListView: View {
       .navigationTitle("filter.filters")
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      .background(.gray)
       .task {
         do {
           isLoading = true

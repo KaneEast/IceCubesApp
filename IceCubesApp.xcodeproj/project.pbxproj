@@ -509,6 +509,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C194A652B299FD300135773 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				3CE7707F2B28643900C7ADE7 /* Account */,
+				3CE7700E2B2863A900C7ADE7 /* AppAccount */,
+				3CE771972B286B8200C7ADE7 /* Env */,
+				3CE770CB2B2868E800C7ADE7 /* Models */,
+				3CE771612B286B5700C7ADE7 /* Network */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		3CE7700E2B2863A900C7ADE7 /* AppAccount */ = {
 			isa = PBXGroup;
 			children = (
@@ -524,33 +536,18 @@
 		3CE770192B28640300C7ADE7 /* Status */ = {
 			isa = PBXGroup;
 			children = (
+				3CE770392B28640300C7ADE7 /* StatusEditHistoryView.swift */,
+				3CE7701F2B28640300C7ADE7 /* Visibility.swift */,
+				3CE7701D2B28640300C7ADE7 /* StatusEmbeddedView.swift */,
+				3CE771352B286AC400C7ADE7 /* StatusEditorToolbarItem.swift */,
 				3CE771AA2B286B8200C7ADE7 /* Duration.swift */,
-				3CE7701C2B28640300C7ADE7 /* Embed */,
-				3CE7701E2B28640300C7ADE7 /* Ext */,
 				3CE770202B28640300C7ADE7 /* Row */,
 				3CE770322B28640300C7ADE7 /* Detail */,
 				3CE770352B28640300C7ADE7 /* List */,
-				3CE770382B28640300C7ADE7 /* History */,
 				3CE7703A2B28640300C7ADE7 /* Editor */,
 				3CE770502B28640300C7ADE7 /* Poll */,
 			);
 			path = Status;
-			sourceTree = "<group>";
-		};
-		3CE7701C2B28640300C7ADE7 /* Embed */ = {
-			isa = PBXGroup;
-			children = (
-				3CE7701D2B28640300C7ADE7 /* StatusEmbeddedView.swift */,
-			);
-			path = Embed;
-			sourceTree = "<group>";
-		};
-		3CE7701E2B28640300C7ADE7 /* Ext */ = {
-			isa = PBXGroup;
-			children = (
-				3CE7701F2B28640300C7ADE7 /* Visibility.swift */,
-			);
-			path = Ext;
 			sourceTree = "<group>";
 		};
 		3CE770202B28640300C7ADE7 /* Row */ = {
@@ -602,23 +599,14 @@
 			path = List;
 			sourceTree = "<group>";
 		};
-		3CE770382B28640300C7ADE7 /* History */ = {
-			isa = PBXGroup;
-			children = (
-				3CE770392B28640300C7ADE7 /* StatusEditHistoryView.swift */,
-			);
-			path = History;
-			sourceTree = "<group>";
-		};
 		3CE7703A2B28640300C7ADE7 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				3CE7704F2B28640300C7ADE7 /* StatusEditorViewModelMode.swift */,
 				3CE7703B2B28640300C7ADE7 /* StatusEditorViewModel.swift */,
 				3CE7703C2B28640300C7ADE7 /* StatusEditorView.swift */,
 				3CE7703D2B28640300C7ADE7 /* Drafts */,
-				3CE7703F2B28640300C7ADE7 /* UITextView */,
 				3CE770442B28640300C7ADE7 /* Components */,
-				3CE7704F2B28640300C7ADE7 /* StatusEditorViewModelMode.swift */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -806,7 +794,6 @@
 		3CE771272B286AC400C7ADE7 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
-				3CE771292B286AC400C7ADE7 /* SFSymbols.swift */,
 				3CE7712A2B286AC400C7ADE7 /* Resources */,
 				3CE7712E2B286AC400C7ADE7 /* DesignSystem.swift */,
 				3CE7712F2B286AC400C7ADE7 /* ColorSet.swift */,
@@ -830,10 +817,8 @@
 			isa = PBXGroup;
 			children = (
 				3CE771342B286AC400C7ADE7 /* DEmptyView.swift */,
-				3CE771352B286AC400C7ADE7 /* StatusEditorToolbarItem.swift */,
 				3CE771362B286AC400C7ADE7 /* EmojiText.swift */,
 				3CE771372B286AC400C7ADE7 /* ScrollViewOffsetReader.swift */,
-				3CE771382B286AC400C7ADE7 /* ScrollToView.swift */,
 				3CE771392B286AC400C7ADE7 /* FollowRequestButtons.swift */,
 				3CE7713A2B286AC400C7ADE7 /* ThemePreviewView.swift */,
 				3CE7713B2B286AC400C7ADE7 /* AvatarView.swift */,
@@ -945,6 +930,9 @@
 		3CE771D42B28A85D00C7ADE7 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3CE771292B286AC400C7ADE7 /* SFSymbols.swift */,
+				3CE771282B286AC400C7ADE7 /* FontPicker.swift */,
+				3CE771382B286AC400C7ADE7 /* ScrollToView.swift */,
 				3CE770D62B2868E800C7ADE7 /* Conf.swift */,
 				9FAD85A7297582F100496AB1 /* QuickLookRepresentable.swift */,
 				3CE771A02B286B8200C7ADE7 /* AppStorage.swift */,
@@ -955,24 +943,11 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		3CE771D52B28A90C00C7ADE7 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				3CE770A42B2864BF00C7ADE7 /* TimelineDatasource.swift */,
-				3CE770A52B2864BF00C7ADE7 /* TimelinePrefetcher.swift */,
-				3CE770A62B2864BF00C7ADE7 /* PendingStatusesObserver.swift */,
-				3CE770A72B2864BF00C7ADE7 /* TimelineViewModel.swift */,
-				3CE770A82B2864BF00C7ADE7 /* TimelineView.swift */,
-				3CE770A92B2864BF00C7ADE7 /* TimelineFilter.swift */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
 		3CE771D62B28A95200C7ADE7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				3CE7703F2B28640300C7ADE7 /* UITextView */,
 				3CE771332B286AC400C7ADE7 /* Views */,
-				3CE771282B286AC400C7ADE7 /* FontPicker.swift */,
 				3CE770B92B2867C100C7ADE7 /* Conversations */,
 				3CE771562B286B2300C7ADE7 /* MediaUI */,
 				3CE770192B28640300C7ADE7 /* Status */,
@@ -1033,18 +1008,6 @@
 			path = Plurals;
 			sourceTree = "<group>";
 		};
-		9F398AB429360A5800A889F2 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				3CE771D62B28A95200C7ADE7 /* Components */,
-				9FAE4AC9293783A200772766 /* Tabs */,
-				9FBFE63C292A715500C250E9 /* IceCubesApp.swift */,
-				3CE7713F2B286AC400C7ADE7 /* SceneDelegate.swift */,
-				9FAD85CE2975B68900496AB1 /* SideBarView.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
 		9F398AB529360A6100A889F2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1057,7 +1020,12 @@
 		9F7335F02967607A00AFF0BA /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
-				3CE771D52B28A90C00C7ADE7 /* Helper */,
+				3CE770A42B2864BF00C7ADE7 /* TimelineDatasource.swift */,
+				3CE770A52B2864BF00C7ADE7 /* TimelinePrefetcher.swift */,
+				3CE770A62B2864BF00C7ADE7 /* PendingStatusesObserver.swift */,
+				3CE770A72B2864BF00C7ADE7 /* TimelineViewModel.swift */,
+				3CE770A82B2864BF00C7ADE7 /* TimelineView.swift */,
+				3CE770A92B2864BF00C7ADE7 /* TimelineFilter.swift */,
 				9F398AB229360A4C00A889F2 /* TimelineTab.swift */,
 				9F7335F12967608F00AFF0BA /* AddRemoteTimelineView.swift */,
 			);
@@ -1083,15 +1051,16 @@
 			path = Embeds;
 			sourceTree = "<group>";
 		};
-		9FAE4AC9293783A200772766 /* Tabs */ = {
+		9FAE4AC9293783A200772766 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				9F7335F02967607A00AFF0BA /* Timeline */,
 				3CE770B02B28653100C7ADE7 /* Explore */,
 				9FE151A4293C90EA00E9683D /* Profile */,
 				9F2B92F5295AE04800DE16D0 /* Tabs.swift */,
+				9FAD85CE2975B68900496AB1 /* SideBarView.swift */,
 			);
-			path = Tabs;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		9FBFE630292A715500C250E9 = {
@@ -1114,20 +1083,19 @@
 		9FBFE63B292A715500C250E9 /* IceCubesApp */ = {
 			isa = PBXGroup;
 			children = (
-				9F398AB429360A5800A889F2 /* App */,
+				9FBFE63C292A715500C250E9 /* IceCubesApp.swift */,
+				3CE7713F2B286AC400C7ADE7 /* SceneDelegate.swift */,
+				3C194A652B299FD300135773 /* Core */,
+				3CE771D62B28A95200C7ADE7 /* Components */,
+				9FAE4AC9293783A200772766 /* Screens */,
 				3CE771D72B28AB0D00C7ADE7 /* Router */,
-				3CE7700E2B2863A900C7ADE7 /* AppAccount */,
-				3CE7707F2B28643900C7ADE7 /* Account */,
 				3CE771272B286AC400C7ADE7 /* DesignSystem */,
-				9FA0D2AC29921C1F008A143B /* Embeds */,
-				3CE771972B286B8200C7ADE7 /* Env */,
 				3CE771D42B28A85D00C7ADE7 /* Helpers */,
-				3CE770CB2B2868E800C7ADE7 /* Models */,
-				3CE771612B286B5700C7ADE7 /* Network */,
-				9FD34822293D06E800DB0EE9 /* Assets.xcassets */,
-				9FAE4AC8293774FF00772766 /* Info.plist */,
 				9F398AB529360A6100A889F2 /* Resources */,
+				9FA0D2AC29921C1F008A143B /* Embeds */,
 				9FAD85822971BF7200496AB1 /* Secret.plist */,
+				9FAE4AC8293774FF00772766 /* Info.plist */,
+				9FD34822293D06E800DB0EE9 /* Assets.xcassets */,
 			);
 			path = IceCubesApp;
 			sourceTree = "<group>";
@@ -1669,7 +1637,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.9.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kane.in;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kane.IceCubesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1691,14 +1659,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 730;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"IceCubesApp/Resources\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ANU45NJ4HN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1722,7 +1688,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.9.3;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kane.IceCubesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
